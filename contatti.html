@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti — GRU SCAR SRL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .btn-loading .spinner{display:block}
+    .btn-loading .btn-label{opacity:.7}
+    .map-wrap{width:100%;height:240px;border-radius:var(--radius-lg);border:1.5px solid var(--border);overflow:hidden;margin-top:1.5rem}
+    .map-wrap iframe{width:100%;height:100%;border:none;display:block}
+  </style>
+</head>
+<body>
+  <header id="navbar"></header>
+
+  <div class="page-header">
+    <div class="container page-header-inner">
+      <span class="section-tag">Parlaci</span>
+      <h1>Contatti</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><span>›</span><span>Contatti</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="grid-2 fade-in" style="gap:4rem;align-items:flex-start;">
+
+        <!-- ── SINISTRA: info + mappa ── -->
+        <div>
+          <span class="section-tag">Come Trovarci</span>
+          <h2>Siamo qui<br>per <em style="color:var(--gold);">aiutarti.</em></h2>
+          <div class="divider"></div>
+          <p style="color:var(--text-muted);margin-bottom:2rem;line-height:1.8;">Non esitare a contattarci per qualsiasi informazione su gru, attrezzature, acquisti o vendite. Il nostro team è a tua disposizione.</p>
+
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+
+            <!-- Indirizzo + link Maps -->
+            <a href="https://maps.app.goo.gl/vVERTquAa7jXEir96" target="_blank" rel="noopener" class="contact-card-row" style="text-decoration:none;">
+              <div class="contact-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-lbl">Indirizzo</div>
+                <div class="contact-val">GRU SCAR SRL</div>
+                <div style="font-size:.78rem;color:var(--gold);margin-top:.2rem;font-weight:600;">Apri in Google Maps →</div>
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:info@gruscar.it" class="contact-card-row" style="text-decoration:none;">
+              <div class="contact-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="contact-lbl">Email</div>
+                <div class="contact-val" style="color:var(--gold);font-weight:600;">info@gruscar.it</div>
+                <div style="font-size:.78rem;color:var(--text-dim);margin-top:.2rem;">Risposta entro 24 ore lavorative</div>
+              </div>
+            </a>
+
+            <!-- Telefono -->
+            <a href="tel:+390599282940" class="contact-card-row" style="text-decoration:none;">
+              <div class="contact-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-lbl">Telefono</div>
+                <div class="contact-val" style="font-weight:600;">+39 059 928294</div>
+                <div style="font-size:.78rem;color:var(--text-dim);margin-top:.2rem;">Clicca per chiamare</div>
+              </div>
+            </a>
+
+            <!-- Orari -->
+            <div class="contact-card-row">
+              <div class="contact-icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="contact-lbl">Orari di Apertura</div>
+                <div class="contact-val">Lun–Ven: 9:00–18:00<br>Sabato: 9:00–13:00<br>Domenica: Chiuso</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Maps embed -->
+          <div class="map-wrap">
+            <iframe
+              src="https://maps.google.com/maps?q=GRU+SCAR+SRL&output=embed&hl=it&z=15"
+              allowfullscreen loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="GRU SCAR SRL — Posizione su mappa">
+            </iframe>
+          </div>
+          <div style="margin-top:.5rem;text-align:right;">
+            <a href="https://maps.app.goo.gl/vVERTquAa7jXEir96" target="_blank" rel="noopener"
+               style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;">
+              Apri in Google Maps →
+            </a>
+          </div>
+        </div>
+
+        <!-- ── DESTRA: form con EmailJS ── -->
+        <div>
+          <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-xl);padding:2.5rem;">
+            <span class="section-tag">Scrivici</span>
+            <h3 style="margin-bottom:.35rem;margin-top:.25rem;">Invia un Messaggio</h3>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.7;">Il messaggio arriverà direttamente alla nostra email. Ti risponderemo presto.</p>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Nome *</label>
+                <input class="form-input" id="cNome" type="text" placeholder="Mario Rossi" maxlength="80">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email *</label>
+                <input class="form-input" id="cEmail" type="email" placeholder="mario@email.com" maxlength="120">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Telefono (opzionale)</label>
+              <input class="form-input" id="cTelefono" type="tel" placeholder="+39 000 0000000" maxlength="20">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Oggetto</label>
+              <select class="form-input" id="cOggetto">
+                <option value="">Seleziona l'oggetto…</option>
+                <option>Informazioni su un Prodotto</option>
+                <option>Acquisto Prodotto / Gru</option>
+                <option>Mercato Usato</option>
+                <option>Riparazione / Assistenza</option>
+                <option>Noleggio</option>
+                <option>Collaborazione</option>
+                <option>Altro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Messaggio *</label>
+              <textarea class="form-input" id="cMessaggio" placeholder="Scrivi il tuo messaggio qui…" maxlength="2000" style="min-height:150px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;font-size:.83rem;color:var(--text-muted);">
+                <input type="checkbox" id="cPrivacy" style="margin-top:3px;width:16px;height:16px;cursor:pointer;accent-color:var(--gold);">
+                <span>Accetto la <a href="https://www.iubenda.com/privacy-policy/58599161" target="_blank" rel="noopener" class="text-gold">Privacy Policy</a>. I miei dati saranno usati solo per rispondere a questa richiesta. *</span>
+              </label>
+            </div>
+
+            <!-- Status feedback -->
+            <div id="formStatus" style="display:none;padding:1rem;border-radius:var(--radius);margin-bottom:1rem;font-size:.88rem;line-height:1.6;"></div>
+
+            <button class="btn btn-gold w-full" id="sendBtn" onclick="sendContactEmail()" style="padding:1rem;">
+              <div style="display:flex;align-items:center;gap:.6rem;justify-content:center;">
+                <div class="spinner" id="sendSpinner"></div>
+                <span id="sendLabel">Invia Messaggio →</span>
+              </div>
+            </button>
+            <p style="font-size:.72rem;color:var(--text-dim);margin-top:1rem;text-align:center;">🔒 I tuoi dati sono protetti. Non li condividiamo con terzi.</p>
+          </div>
+
+          <!-- Quick links -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
+            <a href="vendi-usato.html" style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;transition:var(--transition);" onmouseover="this.style.borderColor='var(--gold-border)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem;margin-bottom:.4rem;">📦</div>
+              <div style="font-weight:600;font-size:.88rem;">Vendi Usato</div>
+              <div style="font-size:.78rem;color:var(--text-muted);margin-top:.2rem;">Scopri come</div>
+            </a>
+            <a href="prodotti.html" style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;transition:var(--transition);" onmouseover="this.style.borderColor='var(--gold-border)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem;margin-bottom:.4rem;">🔧</div>
+              <div style="font-weight:600;font-size:.88rem;">Prodotti</div>
+              <div style="font-size:.78rem;color:var(--text-muted);margin-top:.2rem;">Vedi il catalogo</div>
+            </a>
+          </div>
+
+          <!-- Direct call CTA -->
+          <a href="tel:+390599282940"
+             style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem;background:var(--text);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;text-decoration:none;transition:opacity .2s;"
+             onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <div style="font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6b6459;">Preferisci Chiamare?</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.25rem;color:#f6f3ee;margin-top:.15rem;">+39 059 928294</div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+  <script src="main.js"></script>
+  <script src="components.js"></script>
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       EMAILJS — GRU SCAR SRL
+       Public Key  : sRyxbtJ7JPZCJRwLZ
+       Service ID  : service_rb8uk1l
+       Template ID : template_x80r5hd
+
+       ► CONFIGURA IL TEMPLATE su emailjs.com:
+         To email : info@gruscar.it
+         Subject  : Nuovo messaggio dal sito: {{subject}}
+         Content  :
+           Nome:     {{from_name}}
+           Email:    {{from_email}}
+           Telefono: {{phone}}
+           Oggetto:  {{subject}}
+           ───────────────────
+           {{message}}
+    ═══════════════════════════════════════════════════════ */
+    emailjs.init({ publicKey: 'sRyxbtJ7JPZCJRwLZ' });
+
+    function sendContactEmail() {
+      const nome    = document.getElementById('cNome').value.trim();
+      const email   = document.getElementById('cEmail').value.trim();
+      const tel     = document.getElementById('cTelefono').value.trim();
+      const oggetto = document.getElementById('cOggetto').value || 'Nessun oggetto';
+      const msg     = document.getElementById('cMessaggio').value.trim();
+      const privacy = document.getElementById('cPrivacy').checked;
+
+      // Validazione
+      if (!nome || nome.length < 2) return showToast('Inserisci il tuo nome.', 'error');
+      if (!isValidEmail(email))     return showToast("Inserisci un'email valida.", 'error');
+      if (!msg || msg.length < 10)  return showToast('Scrivi un messaggio (min. 10 caratteri).', 'error');
+      if (!privacy)                 return showToast('Devi accettare la Privacy Policy.', 'error');
+
+      // Loading
+      const btn      = document.getElementById('sendBtn');
+      const spinner  = document.getElementById('sendSpinner');
+      const label    = document.getElementById('sendLabel');
+      const status   = document.getElementById('formStatus');
+      btn.disabled   = true;
+      spinner.style.display = 'block';
+      label.textContent = 'Invio in corso…';
+      status.style.display = 'none';
+
+      emailjs.send('service_rb8uk1l', 'template_x80r5hd', {
+        from_name:  nome.substring(0, 80),
+        from_email: email.substring(0, 120),
+        phone:      tel || 'Non fornito',
+        subject:    oggetto,
+        message:    msg.substring(0, 2000),
+        to_email:   'info@gruscar.it',
+        reply_to:   email
+      })
+      .then(() => {
+        // ✓ Successo
+        btn.disabled = false;
+        spinner.style.display = 'none';
+        label.textContent = 'Invia Messaggio →';
+        status.style.cssText = 'display:block;padding:1rem;border-radius:var(--radius);margin-bottom:1rem;font-size:.88rem;background:rgba(45,122,79,.08);border:1.5px solid rgba(45,122,79,.25);color:var(--success);';
+        status.innerHTML = '✓ Messaggio inviato! Ti risponderemo a <strong>' + sanitize(email) + '</strong> entro 24 ore.';
+        showToast('Messaggio inviato con successo! ✓', 'success');
+        // Salva in localStorage per il pannello admin
+        const contacts = getData('contactMessages');
+        contacts.unshift({ id:'MSG-'+Date.now(), nome:nome.substring(0,80), email:email.substring(0,120), telefono:tel||'—', oggetto, messaggio:msg.substring(0,2000), date:new Date().toISOString(), read:false });
+        setData('contactMessages', contacts);
+        // Reset
+        ['cNome','cEmail','cTelefono','cMessaggio'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+        document.getElementById('cOggetto').value = '';
+        document.getElementById('cPrivacy').checked = false;
+      })
+      .catch((err) => {
+        // ✕ Errore
+        btn.disabled = false;
+        spinner.style.display = 'none';
+        label.textContent = 'Invia Messaggio →';
+        status.style.cssText = 'display:block;padding:1rem;border-radius:var(--radius);margin-bottom:1rem;font-size:.88rem;background:rgba(192,57,43,.08);border:1.5px solid rgba(192,57,43,.25);color:var(--danger);';
+        status.innerHTML = '✕ Errore invio. Riprova oppure chiamaci al <a href="tel:+390599282940" style="color:var(--danger);font-weight:600;">+39 059 928294</a>.';
+        showToast('Errore invio. Riprova.', 'error');
+        console.error('EmailJS error:', err);
+      });
+    }
+  </script>
+</body>
+</html>

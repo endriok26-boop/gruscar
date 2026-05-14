@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRU SCAR SRL — Home</title>
+  <meta name="description" content="GRU SCAR SRL — Riparazione, allestimento e vendita di gru, sistemi scarrabili e camion. Soluzioni per uso professionale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── HERO ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+      background: url('sfondo1.png') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 0;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 0;
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold-bg);
+      border: 1.5px solid var(--gold-border);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-title {
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+    .hero-divider { width: 100%; height: 1.5px; background: var(--border); margin-bottom: 2.5rem; }
+    .hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #ffffff;
+      line-height: 1;
+    }
+    .hero-stat-lbl {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-top: 0.3rem;
+    }
+    .hero-right {
+      display: none;
+    }
+    .hero-img-main {
+      width: 100%; height: 100%;
+      min-height: 550px;
+      border-left: 1.5px solid var(--border);
+      flex-direction: column; gap: 1rem;
+    }
+
+    /* Floating card on hero */
+    .hero-float-card {
+      position: absolute; bottom: 3rem; left: -2rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+      min-width: 200px;
+    }
+    .hero-float-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+    .hero-float-value { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); margin-top: 0.2rem; }
+    .hero-float-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+    /* ─── FEATURES STRIP ────────────────────────────────────── */
+    .features-strip {
+      background: var(--text);
+      padding: 2rem 0;
+    }
+    .features-row {
+      display: flex; align-items: stretch;
+      divide-x: 1px solid #2d2b27;
+    }
+    .feat-item {
+      flex: 1;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 2rem;
+      border-right: 1px solid #2d2b27;
+    }
+    .feat-item:last-child { border-right: none; }
+    .feat-icon { color: var(--gold); flex-shrink: 0; }
+    .feat-label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; color: #c8c2b6; text-transform: uppercase; }
+
+    /* ─── HIGHLIGHTS ────────────────────────────────────────── */
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .highlight-item {
+      padding: 3rem;
+      border-right: 1.5px solid var(--border);
+      border-bottom: 1.5px solid var(--border);
+      transition: var(--transition);
+    }
+    .highlight-item:nth-child(2n) { border-right: none; }
+    .highlight-item:nth-child(3), .highlight-item:nth-child(4) { border-bottom: none; }
+    .highlight-item:hover { background: var(--surface); }
+    .hi-number { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--surface2); line-height: 1; margin-bottom: 1rem; font-weight: 600; }
+    .hi-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.75rem; }
+
+    /* ─── CTA BANNER ────────────────────────────────────────── */
+    .cta-banner {
+      background: var(--text);
+      border-radius: var(--radius-xl);
+      padding: 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .cta-banner h2 { color: #f6f3ee; font-size: clamp(1.6rem,3vw,2.5rem); }
+    .cta-banner p  { color: #6b6459; font-size: 0.95rem; margin-top: 0.5rem; }
+    .cta-banner-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ─── RECENT PRODUCTS PREVIEW ────────────────────────────── */
+    .prod-preview { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+
+    @media (max-width: 1024px) {
+      .hero {
+        min-height: 100vh;
+      }
+      .hero-right { display: none; }
+      .hero-left { padding: 5rem 0 4rem; }
+      .prod-preview { grid-template-columns: repeat(2,1fr); }
+      .highlight-grid { grid-template-columns: 1fr; }
+      .highlight-item { border-right: none; }
+      .highlight-item:nth-child(3) { border-bottom: 1.5px solid var(--border); }
+    }
+    @media (max-width: 640px) {
+      .features-row { flex-direction: column; }
+      .feat-item { border-right: none; border-bottom: 1px solid #2d2b27; }
+      .feat-item:last-child { border-bottom: none; }
+      .cta-banner { padding: 2.5rem 1.5rem; }
+      .prod-preview { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR (iniettata da components.js) -->
+  <header id="navbar"></header>
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="hero">
+    <div class="container" style="position:relative;z-index:1;width:100%;">
+      <div class="hero-left fade-in">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Qualità &amp; Professionalità
+        </div>
+        <h1 class="hero-title">
+          Riparazione, Allestimento<br>
+          <em>e Modifica</em><br>
+          di Gru e Camion
+        </h1>
+        <p class="hero-desc">
+          Soluzioni tecniche per gru, impianti scarrabili, sistemi di compattazione e veicoli industriali. Nuovo, usato e assistenza con controllo tecnico professionale.
+        </p>
+        <div class="hero-actions">
+          <a href="prodotti.html" class="btn btn-gold btn-lg">Scopri i Prodotti →</a>
+          <a href="chi-siamo.html" class="btn btn-outline btn-lg">Chi Siamo</a>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">60+</div>
+            <div class="hero-stat-lbl">Anni Esperienza</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">150+</div>
+            <div class="hero-stat-lbl">Clienti Soddisfatti</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">200+</div>
+            <div class="hero-stat-lbl">Prodotti</div>
+          </div>
+        </div>
+      </div>
+      <!-- hero-right image block removed -->
+    </div>
+  </section>
+
+  <!-- ════════════ FEATURES STRIP ════════════ -->
+  <div class="features-strip fade-in">
+    <div class="container">
+      <div class="features-row">
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="feat-label">Qualità Certificata</div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="feat-label">Consegna Rapida</div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          </div>
+          <div class="feat-label">Usato Verificato</div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="feat-label">Supporto Diretto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ HIGHLIGHTS ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="flex-between mb-2 fade-in" style="flex-wrap:wrap;gap:1.5rem;align-items:flex-end;">
+        <div>
+          <span class="section-tag">Perché Sceglierci</span>
+          <h2>Servizi Tecnici per Gru,<br>Scarrabili e Camion</h2>
+        </div>
+        <a href="cosa-offriamo.html" class="btn btn-outline">Tutti i Servizi →</a>
+      </div>
+      <div class="highlight-grid fade-in fade-in-d1">
+        <div class="highlight-item">
+          <div class="hi-number">01</div>
+          <div class="hi-title">Riparazione Specializzata</div>
+          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">Interventi rapidi su gru, impianti di compattazione e sistemi scarrabili con ricambi originali e controlli tecnici.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-number">02</div>
+          <div class="hi-title">Allestimento e Modifica</div>
+          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">Personalizziamo camion e gru con soluzioni scarrabili su misura, gestione carichi e sistemi di compattazione integrati.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-number">03</div>
+          <div class="hi-title">Vendita Nuovo e Usato</div>
+          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">Catalogo di mezzi e attrezzature selezionati, controllati e pronti all’uso per trasporto, raccolta e movimentazione.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-number">04</div>
+          <div class="hi-title">Acquisto Usato</div>
+          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">Acquistiamo camion usati, gru e impianti scarrabili con valutazione tecnica trasparente e pagamento rapido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ PRODOTTI ANTEPRIMA ════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="flex-between mb-2 fade-in" style="flex-wrap:wrap;gap:1.5rem;align-items:flex-end;">
+        <div>
+          <span class="section-tag">Cosa offriamo</span>
+          <h2>Prodotti in Evidenza</h2>
+        </div>
+        <a href="prodotti.html" class="btn btn-outline">Vedi Tutti →</a>
+      </div>
+      <div class="prod-preview fade-in fade-in-d1" id="homeProducts"></div>
+    </div>
+  </section>
+
+  <!-- ════════════ USATO ANTEPRIMA ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="flex-between mb-2 fade-in" style="flex-wrap:wrap;gap:1.5rem;align-items:flex-end;">
+        <div>
+          <span class="section-tag">Mercato Usato</span>
+          <h2>Articoli Recenti</h2>
+          <p class="lead mt-1" style="font-size:.95rem;">Articoli verificati e selezionati dal nostro team.</p>
+        </div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+          <a href="vendi-usato.html" class="btn btn-outline btn-sm">+ Vendi il tuo Usato</a>
+          <a href="usato.html" class="btn btn-gold btn-sm">Vedi Tutto →</a>
+        </div>
+      </div>
+      <div class="grid-4 fade-in fade-in-d1" id="homeUsed"></div>
+    </div>
+  </section>
+
+  <!-- ════════════ CTA BANNER ════════════ -->
+  <section class="section-sm">
+    <div class="container fade-in">
+      <div class="cta-banner">
+        <div>
+          <h2>Hai un Camion o un Impianto da Vendere?</h2>
+          <p>Valutiamo usato professionale per gru, impianti scarrabili, sistemi di compattazione e veicoli industriali. Offerta rapida e pratica commerciale dedicata.</p>
+        </div>
+        <div class="cta-banner-actions">
+          <a href="vendi-usato.html" class="btn btn-gold btn-lg">Vendi il tuo Usato →</a>
+          <a href="contatti.html" class="btn btn-light btn-lg">Contattaci</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (iniettato da components.js) -->
+  <footer id="site-footer"></footer>
+
+  <script src="main.js"></script>
+  <script src="components.js"></script>
+  <script>
+    // Prodotti anteprima (4 prodotti)
+    function renderHomeProducts() {
+      const grid = document.getElementById('homeProducts');
+      const prods = getProducts().slice(0,4);
+      const productImages = [
+        'prodotto1.jpg',
+        'prodotto2.png',
+        'prodotto3.png',
+        'prodotto4.png'
+      ];
+      grid.innerHTML = prods.map(p => `
+        <div class="product-card">
+          <div class="product-img">
+            <div class="img-ph" style="height:190px;border-radius:0;border:none;border-bottom:1.5px solid var(--border);padding:0;overflow:hidden;">
+              <img src="${sanitize(p.foto || productImages[prods.indexOf(p)] || productImages[0])}" alt="${sanitize(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="prod-cat">${sanitize(p.cat)}</div>
+            <div class="prod-name">${sanitize(p.name)}</div>
+            <div class="prod-footer">
+              <a href="prodotti.html" class="btn btn-outline btn-sm">Dettagli</a>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    // Usato anteprima (4 articoli)
+    function renderHomeUsed() {
+      const grid = document.getElementById('homeUsed');
+      const items = getUsedItems().filter(i=>i.approved).slice(0,4);
+      grid.innerHTML = items.map(i => `
+        <div class="product-card">
+          <div class="product-img">
+            <div class="img-ph" style="height:190px;border-radius:0;border:none;border-bottom:1.5px solid var(--border);">
+              <div class="prod-badge"><span class="badge cond-${sanitize(i.condition)}">${conditionLabel(i.condition)}</span></div>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <span>Foto Articolo</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="prod-cat" style="color:var(--text-muted);">Venduto da: ${sanitize(i.seller)}</div>
+            <div class="prod-name">${sanitize(i.name)}</div>
+            <div class="prod-footer">
+              <a href="usato.html" class="btn btn-outline btn-sm">Vedi →</a>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHomeProducts();
+      renderHomeUsed();
+    });
+  </script>
+</body>
+</html>

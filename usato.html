@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usato — GRU SCAR SRL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="navbar"></header>
+
+  <div class="page-header">
+    <div class="container page-header-inner">
+      <span class="section-tag">Mercato Usato</span>
+      <h1>Articoli Usati</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><span>›</span><span>Usato</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ INTRO ════════════ -->
+  <section class="section-sm section-alt" style="border-bottom:1.5px solid var(--border);">
+    <div class="container">
+      <div class="flex-between fade-in" style="flex-wrap:wrap;gap:2rem;align-items:center;">
+        <div>
+          <h3>Come Funziona il Mercato Usato</h3>
+          <p style="color:var(--text-muted);font-size:.92rem;margin-top:.5rem;max-width:600px;">Tutti gli articoli sono stati verificati dal nostro team e pubblicati dopo accordo diretto con il venditore. Per acquistare, contattaci via email: gestiremo insieme l'acquisto in modo sicuro.</p>
+        </div>
+        <a href="vendi-usato.html" class="btn btn-gold">+ Vendi il tuo Usato</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ ARTICOLI ════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <!-- FILTRI CONDIZIONE -->
+      <div class="flex-between mb-2 fade-in" style="flex-wrap:wrap;gap:1rem;align-items:center;">
+        <div class="shop-filters" style="margin-bottom:0;">
+          <button class="filter-btn active" onclick="filterUsed('tutti',this)">Tutti</button>
+          <button class="filter-btn" onclick="filterUsed('ottimo',this)">
+            <span style="display:inline-flex;align-items:center;gap:.3rem;">
+              <span style="width:6px;height:6px;background:var(--success);border-radius:50%;display:inline-block;"></span>Ottime Condizioni
+            </span>
+          </button>
+          <button class="filter-btn" onclick="filterUsed('buono',this)">
+            <span style="display:inline-flex;align-items:center;gap:.3rem;">
+              <span style="width:6px;height:6px;background:var(--warning);border-radius:50%;display:inline-block;"></span>Buone Condizioni
+            </span>
+          </button>
+          <button class="filter-btn" onclick="filterUsed('usato',this)">
+            <span style="display:inline-flex;align-items:center;gap:.3rem;">
+              <span style="width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;"></span>Usato
+            </span>
+          </button>
+        </div>
+        <div id="usedCount" style="font-size:.8rem;color:var(--text-muted);"></div>
+      </div>
+
+      <div class="grid-4 fade-in fade-in-d1" id="usedGrid"></div>
+    </div>
+  </section>
+
+  <!-- ════════════ COME ACQUISTARE ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center fade-in" style="max-width:560px;margin:0 auto 3.5rem;">
+        <span class="section-tag">Acquisto Sicuro</span>
+        <h2>Come Acquistare</h2>
+        <div class="divider-center"></div>
+        <p style="color:var(--text-muted);">La compravendita di articoli usati avviene tramite contatto email diretto con il nostro team, che fa da intermediario tra venditore e acquirente.</p>
+      </div>
+      <div class="steps-row fade-in fade-in-d1">
+        <div class="step-item active">
+          <div class="step-num">1</div>
+          <h4 style="margin-bottom:.5rem;">Scegli l'Articolo</h4>
+          <p style="font-size:.83rem;color:var(--text-muted);">Sfoglia gli articoli disponibili e trova quello che fa per te.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <h4 style="margin-bottom:.5rem;">Contattaci via Email</h4>
+          <p style="font-size:.83rem;color:var(--text-muted);">Scrivi a info@gruscar.it indicando l'articolo e le tue domande.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <h4 style="margin-bottom:.5rem;">Trattiamo Insieme</h4>
+          <p style="font-size:.83rem;color:var(--text-muted);">Faremo da intermediari tra te e il venditore per accordarvi sui dettagli.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <h4 style="margin-bottom:.5rem;">Concludi l'Acquisto</h4>
+          <p style="font-size:.83rem;color:var(--text-muted);">Una volta raggiunto l'accordo, procediamo con la vendita in sicurezza.</p>
+        </div>
+      </div>
+
+      <!-- BOX EMAIL CONTATTO -->
+      <div class="fade-in mt-3" style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-xl);padding:3rem;text-align:center;max-width:600px;margin:3rem auto 0;">
+        <div style="width:60px;height:60px;background:var(--gold-bg);border:1.5px solid var(--gold-border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--gold);margin:0 auto 1.5rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3 style="margin-bottom:.75rem;">Interessato a un Articolo?</h3>
+        <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem;">Scrivi direttamente a <strong>info@gruscar.it</strong> indicando l'articolo di interesse e il tuo nome. Risponderemo entro 24 ore lavorative.</p>
+        <a href="mailto:info@gruscar.it?subject=Interesse Articolo Usato&body=Salve, sono interessato/a all'articolo: [NOME ARTICOLO]%0A%0ANome: %0ATelefono: %0AMessaggio:" class="btn btn-gold btn-lg">✉ Scrivi ora a info@gruscar.it</a>
+        <p style="font-size:.72rem;color:var(--text-dim);margin-top:1rem;">⚠️ Sostituisci info@gruscar.it con la tua email reale</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE DETAIL MODAL -->
+  <div class="modal-bg" id="usedModal" onclick="if(event.target===this)closeModal('usedModal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('usedModal')">×</button>
+      <div id="usedModalBody"></div>
+    </div>
+  </div>
+
+  <footer id="site-footer"></footer>
+  <script src="main.js"></script>
+  <script src="components.js"></script>
+  <script>
+    let usedFilter = 'tutti';
+
+    function renderUsedItems(filter) {
+      if (filter !== undefined) usedFilter = filter;
+      const grid = document.getElementById('usedGrid');
+      const count = document.getElementById('usedCount');
+      const items = getUsedItems().filter(i => i.approved && (usedFilter === 'tutti' || i.condition === usedFilter));
+      count.textContent = items.length + ' articol' + (items.length === 1 ? 'o' : 'i');
+      if (!items.length) {
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>Nessun articolo trovato.</p></div>';
+        return;
+      }
+      grid.innerHTML = items.map(i => {
+        const hasFoto = i.photos && i.photos.length > 0;
+        const fotoStyle = hasFoto ? `background-image:url('${i.photos[0]}');background-size:cover;background-position:center;` : '';
+        return `
+        <div class="product-card" style="cursor:pointer;" onclick="openUsedDetail('${sanitize(i.id)}')">
+          <div class="product-img">
+            <div class="img-ph" style="height:200px;border-radius:0;border:none;border-bottom:1.5px solid var(--border);${fotoStyle}">
+              <div class="prod-badge"><span class="badge cond-${sanitize(i.condition)}">${conditionLabel(i.condition)}</span></div>
+              ${!hasFoto ? '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Foto Articolo</span>' : ''}
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="prod-cat" style="color:var(--text-muted);font-weight:400;">Venduto da: ${sanitize(i.seller)}</div>
+            <div class="prod-name">${sanitize(i.name)}</div>
+            <div class="prod-desc" style="font-size:.8rem;">${sanitize(i.desc.substring(0,80))}…</div>
+            <div class="prod-footer">
+              <div class="prod-price">€${i.price}</div>
+              <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;">Info →</span>
+            </div>
+          </div>
+        </div>`}).join('');
+    }
+
+    function filterUsed(f, btn) {
+      document.querySelectorAll('.shop-filters .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderUsedItems(f);
+    }
+
+    function openUsedDetail(id) {
+      const i = getUsedItems().find(x => x.id === id);
+      if (!i) return;
+      const condColors = { ottimo: 'badge-success', buono: 'badge-warning', usato: 'badge-gold' };
+      const hasFoto = i.photos && i.photos.length > 0;
+      const fotoStyle = hasFoto ? `background-image:url('${i.photos[0]}');background-size:cover;background-position:center;` : '';
+      const galleriaHTML = hasFoto && i.photos.length > 1 ? `
+        <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:.5rem;" id="fotoGallery">
+          ${i.photos.map((foto, idx) => `<img src="${foto}" alt="Foto ${idx+1}" data-foto-idx="${idx}" style="width:100%;height:80px;object-fit:cover;border-radius:var(--radius);cursor:pointer;border:1.5px solid var(--border);transition:var(--transition);" class="foto-thumb">`).join('')}
+        </div>` : '';
+      // Salva le foto in un oggetto globale temporaneo
+      window._currentDetailPhotos = i.photos || [];
+      document.getElementById('usedModalBody').innerHTML = `
+        <div style="margin-bottom:1.25rem;">
+          <div class="img-ph" id="modalMainFoto" style="height:220px;border-radius:var(--radius);margin-bottom:1.25rem;${fotoStyle}">
+            ${!hasFoto ? '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Foto Articolo</span>' : ''}
+          </div>
+          ${galleriaHTML}
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem;margin-top:1rem;">
+            <h3>${sanitize(i.name)}</h3>
+            <span class="badge ${condColors[i.condition] || 'badge-neutral'}">${conditionLabel(i.condition)}</span>
+          </div>
+          <div style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);margin-bottom:.75rem;">€${i.price}</div>
+          <p style="font-size:.88rem;color:var(--text-muted);line-height:1.75;margin-bottom:1rem;">${sanitize(i.desc)}</p>
+          <div style="display:flex;gap:1.5rem;font-size:.82rem;color:var(--text-muted);padding:.75rem;background:var(--surface2);border-radius:var(--radius);margin-bottom:1.25rem;">
+            <span>👤 Venditore: <strong style="color:var(--text);">${sanitize(i.seller)}</strong></span>
+          </div>
+          <div style="background:var(--surface2);border-radius:var(--radius);padding:1rem;font-size:.85rem;color:var(--text-muted);margin-bottom:1.5rem;">
+            <strong style="color:var(--text);">Come acquistare:</strong> Contattaci via email indicando questo articolo. Faremo da intermediari per concludere la vendita in sicurezza.
+          </div>
+        </div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+          <a href="mailto:info@gruscar.it?subject=Interesse Articolo: ${sanitize(i.name)}&body=Salve, sono interessato/a all'articolo:%0A%0ANome: ${sanitize(i.name)}%0APrezzo: €${i.price}%0A%0ANome acquirente: %0ATelefono: %0AMessaggio:" class="btn btn-gold" style="flex:1;justify-content:center;">✉ Contatta per Acquistare</a>
+          <button class="btn btn-light" onclick="closeModal('usedModal')">Chiudi</button>
+        </div>`;
+      openModal('usedModal');
+      // Aggancia event listener per galleria foto
+      if (hasFoto && i.photos.length > 1) {
+        setTimeout(() => {
+          document.querySelectorAll('.foto-thumb').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+              const idx = parseInt(thumb.dataset.fotoIdx);
+              document.getElementById('modalMainFoto').style.backgroundImage = `url('${window._currentDetailPhotos[idx]}')`;
+            });
+          });
+        }, 0);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { renderUsedItems(); });
+  </script>
+</body>
+</html>
