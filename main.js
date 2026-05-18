@@ -379,8 +379,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initFadeIn();
   initUsedPhotoPreview();
-  // Close mobile nav on link click
-  document.querySelectorAll('#mobileNav a').forEach(a => a.addEventListener('click', closeMobileNav));
+  // Close mobile nav on link click, even if links are injected later.
+  document.addEventListener('click', e => {
+    if (e.target.closest('#mobileNav a')) closeMobileNav();
+  });
   // Admin login: enter key
   document.getElementById('adminPass')?.addEventListener('keydown', e => { if (e.key === 'Enter') doAdminLogin(); });
   // Admin tab buttons
