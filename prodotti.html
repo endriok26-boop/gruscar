@@ -16,6 +16,7 @@
       margin-top: 3rem;
     }
 
+    /* ─── CARD (anteprima) ─── */
     .product-card {
       background: var(--surface, #fff);
       border-radius: var(--radius-lg, 12px);
@@ -25,40 +26,76 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
     .product-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.13);
     }
 
+    .product-card-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #e8e4de;
+    }
     .product-card-img {
       width: 100%;
-      aspect-ratio: 4/3;
+      height: 100%;
       object-fit: cover;
       display: block;
-      background: #e8e4de;
+      transition: transform 0.4s ease;
     }
-    .product-card-img-ph {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: #e8e4de;
+    .product-card:hover .product-card-img {
+      transform: scale(1.04);
+    }
+    .product-card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%);
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      color: #a09585;
+      align-items: flex-end;
+      padding: 1rem 1.25rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    .product-card-img-ph svg { opacity: .4; }
-    .product-card-img-ph span { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; opacity: .5; }
+    .product-card:hover .product-card-img-overlay {
+      opacity: 1;
+    }
+    .product-card-img-overlay-label {
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .product-card-img-overlay-label svg {
+      width: 14px; height: 14px; opacity: .9;
+    }
+    .product-img-count {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: .2rem .6rem;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
 
     .product-card-body {
-      padding: 1.75rem;
+      padding: 1.5rem 1.75rem 1.75rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
-
     .product-badge {
       display: inline-block;
       font-size: .65rem;
@@ -76,56 +113,410 @@
 
     .product-card-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 500;
       color: var(--text, #1a1714);
-      margin-bottom: .5rem;
+      margin-bottom: .4rem;
       line-height: 1.3;
     }
-
-    .product-card-desc {
-      font-size: .875rem;
+    .product-card-desc-short {
+      font-size: .84rem;
       color: var(--text-muted, #6b6459);
-      line-height: 1.75;
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-specs-mini {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
       margin-bottom: 1.25rem;
     }
-
-    .product-specs {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.5rem 0;
-      border-top: 1px solid rgba(0,0,0,0.07);
-      padding-top: 1rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .45rem 1rem;
+    .spec-chip {
+      font-size: .68rem;
+      font-weight: 500;
+      color: var(--text-muted, #6b6459);
+      background: rgba(0,0,0,.04);
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 6px;
+      padding: .22rem .6rem;
     }
-    .product-specs li {
+    .product-card-cta {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .btn-detail {
+      background: var(--gold, #b8975a);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: .55rem 1.1rem;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-detail:hover { background: #a07a40; transform: translateY(-1px); }
+    .btn-contact-small {
       font-size: .78rem;
       color: var(--text-muted, #6b6459);
+      text-decoration: none;
+      padding: .55rem .9rem;
+      border: 1px solid rgba(0,0,0,.1);
+      border-radius: 8px;
+      transition: border-color .2s, color .2s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-contact-small:hover { border-color: var(--gold,#b8975a); color: var(--gold,#b8975a); }
+
+    /* ─── MODAL ─── */
+    .modal-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(10,8,6,0.88);
+      z-index: 9000;
+      overflow-y: auto;
+      padding: 2rem 1rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .modal-backdrop.active { display: flex; }
+
+    .modal-box {
+      background: var(--surface, #fff);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 960px;
+      margin: auto;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,.45);
+      animation: modalIn .32s cubic-bezier(.22,1,.36,1) both;
+      position: relative;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(28px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(0,0,0,.1);
+      color: #333;
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      z-index: 10;
+      transition: background .2s, transform .2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,.12);
+    }
+    .modal-close:hover { background: #fff; transform: rotate(90deg); }
+
+    /* Gallery */
+    .modal-gallery {
+      position: relative;
+      background: #1a1714;
+      overflow: hidden;
+    }
+    .gallery-main {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .gallery-main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s ease;
+    }
+    .gallery-main:hover img { transform: scale(1.03); }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+      border-radius: 50%;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: background .2s;
+      font-size: 1rem;
+      backdrop-filter: blur(4px);
+    }
+    .gallery-nav:hover { background: rgba(255,255,255,.28); }
+    .gallery-nav.prev { left: 1rem; }
+    .gallery-nav.next { right: 1rem; }
+    .gallery-nav.hidden { display: none; }
+
+    .gallery-counter {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .gallery-thumbs {
+      display: flex;
+      gap: .5rem;
+      padding: .75rem 1rem;
+      background: #111;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .gallery-thumbs::-webkit-scrollbar { display: none; }
+    .gallery-thumb {
+      flex: 0 0 80px;
+      height: 56px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color .2s, opacity .2s;
+      opacity: .55;
+    }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-thumb.active { border-color: var(--gold, #b8975a); opacity: 1; }
+    .gallery-thumb:hover { opacity: .85; }
+
+    /* Modal body */
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 0;
+    }
+    @media (max-width: 720px) {
+      .modal-body { grid-template-columns: 1fr; }
+    }
+
+    .modal-content {
+      padding: 2.25rem 2.5rem;
+      border-right: 1px solid rgba(0,0,0,.07);
+    }
+    @media (max-width: 720px) {
+      .modal-content { padding: 1.75rem 1.5rem; border-right: none; }
+    }
+
+    .modal-badge {
+      display: inline-block;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold, #b8975a);
+      background: rgba(184,151,90,.1);
+      border: 1px solid rgba(184,151,90,.25);
+      border-radius: 20px;
+      padding: .25rem .75rem;
+      margin-bottom: 1rem;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 500;
+      color: var(--text, #1a1714);
+      line-height: 1.25;
+      margin-bottom: 1.1rem;
+    }
+    .modal-desc {
+      font-size: .875rem;
+      color: var(--text-muted, #6b6459);
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+    .modal-desc p { margin-bottom: .75rem; }
+    .modal-desc p:last-child { margin-bottom: 0; }
+
+    .modal-section-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #a09585;
+      margin-bottom: .75rem;
+    }
+
+    .modal-specs {
+      list-style: none;
+      padding: 0; margin: 0 0 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem 1rem;
+      border-top: 1px solid rgba(0,0,0,.07);
+      padding-top: 1.25rem;
+    }
+    .modal-specs li {
       display: flex;
       flex-direction: column;
       gap: .1rem;
     }
-    .product-specs li .spec-label {
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .08em;
+    .modal-specs li .spec-label {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .1em;
       text-transform: uppercase;
       color: #a09585;
     }
-    .product-specs li .spec-val {
+    .modal-specs li .spec-val {
       font-weight: 500;
       color: var(--text, #1a1714);
-      font-size: .82rem;
+      font-size: .84rem;
     }
 
-    .product-card-actions {
-      margin-top: auto;
-      display: flex;
-      gap: .75rem;
-      flex-wrap: wrap;
+    .modal-highlights {
+      list-style: none;
+      padding: 0; margin: 0 0 1.5rem 0;
     }
+    .modal-highlights li {
+      font-size: .84rem;
+      color: var(--text-muted, #6b6459);
+      padding: .35rem 0;
+      border-bottom: 1px solid rgba(0,0,0,.05);
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      line-height: 1.5;
+    }
+    .modal-highlights li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold, #b8975a);
+      margin-top: .5rem;
+      flex-shrink: 0;
+    }
+
+    /* Sidebar */
+    .modal-sidebar {
+      padding: 2.25rem 2rem;
+      background: #f9f7f4;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (max-width: 720px) {
+      .modal-sidebar { padding: 1.5rem; background: #f4f1ed; border-top: 1px solid rgba(0,0,0,.07); }
+    }
+    .modal-sidebar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text, #1a1714);
+    }
+    .modal-sidebar p {
+      font-size: .8rem;
+      color: var(--text-muted, #6b6459);
+      line-height: 1.7;
+    }
+    .modal-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+    }
+    .btn-modal-primary {
+      display: block;
+      text-align: center;
+      background: var(--gold, #b8975a);
+      color: #fff;
+      text-decoration: none;
+      padding: .8rem 1.25rem;
+      border-radius: 9px;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      transition: background .2s, transform .15s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-modal-primary:hover { background: #a07a40; transform: translateY(-1px); }
+    .btn-modal-secondary {
+      display: block;
+      text-align: center;
+      background: transparent;
+      color: var(--text, #1a1714);
+      text-decoration: none;
+      padding: .8rem 1.25rem;
+      border-radius: 9px;
+      font-size: .82rem;
+      font-weight: 500;
+      border: 1px solid rgba(0,0,0,.15);
+      transition: border-color .2s, color .2s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-modal-secondary:hover { border-color: var(--gold,#b8975a); color: var(--gold,#b8975a); }
+    .modal-info-pills {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .info-pill {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      font-size: .78rem;
+      color: var(--text-muted, #6b6459);
+    }
+    .info-pill-icon {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: rgba(184,151,90,.12);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .info-pill-icon svg { width: 14px; height: 14px; color: var(--gold,#b8975a); }
+
+    /* Fullscreen lightbox from modal */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 80px rgba(0,0,0,.5);
+    }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #fff;
+      border-radius: 50%;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.2); }
 
     /* CTA Progetto */
     .custom-project-section {
@@ -144,58 +535,14 @@
     .custom-project-section h2 { color: #f6f3ee; }
     .custom-project-section p { color: #6b6459; margin-top: .75rem; max-width: 480px; line-height: 1.8; }
     .custom-project-side {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      min-width: 200px;
-      align-items: flex-end;
+      display: flex; flex-direction: column; gap: 1rem;
+      min-width: 200px; align-items: flex-end;
     }
-    .email-highlight {
-      font-size: .78rem;
-      color: var(--gold, #b8975a);
-      letter-spacing: .06em;
-      font-weight: 500;
-      text-align: right;
-    }
-
-    /* Lightbox */
-    .lightbox-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .lightbox-overlay.active { display: flex; }
-    .lightbox-overlay img {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 0 80px rgba(0,0,0,.5);
-    }
-    .lightbox-close {
-      position: fixed; top: 1.5rem; right: 1.5rem;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.15);
-      color: #fff;
-      border-radius: 50%;
-      width: 42px; height: 42px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background .2s;
-    }
-    .lightbox-close:hover { background: rgba(255,255,255,.2); }
-    .product-card-img { cursor: zoom-in; }
   </style>
 </head>
 <body>
   <header id="navbar"></header>
 
-  <!-- ═══ PAGE HEADER ═══ -->
   <div class="page-header">
     <div class="container page-header-inner">
       <span class="section-tag">I Nostri Prodotti</span>
@@ -206,7 +553,6 @@
     </div>
   </div>
 
-  <!-- ═══ INTRO ═══ -->
   <section class="section section-alt">
     <div class="container">
       <div style="max-width:720px;">
@@ -222,121 +568,14 @@
   <!-- ═══ GRIGLIA PRODOTTI ═══ -->
   <section class="section">
     <div class="container">
-
       <div class="text-center fade-in" style="max-width:560px;margin:0 auto 1rem;">
         <h2>I Prodotti in Evidenza</h2>
         <div class="divider-center"></div>
       </div>
 
-      <div class="products-grid fade-in fade-in-d1">
-
-        <!-- ── PRODOTTO 1 (foto reale) ── -->
-        <div class="product-card">
-          <img
-            class="product-card-img"
-            src="prodotto1.jpg"
-            alt="Scania con gru Palfinger Epsilon e cassone scarrabile"
-            onclick="openLightbox(this.src)"
-          />
-          <div class="product-card-body">
-            <div class="product-card-title">Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile</div>
-            <p class="product-card-desc">Allestimento completo su trattore Scania P: gru a gancio/polipo Palfinger Epsilon serie Q con braccio articolato, cassone scarrabile verde a bordi alti per la raccolta rifiuti o inerti.</p>
-            <ul class="product-specs">
-              <li><span class="spec-label">Veicolo</span><span class="spec-val">Scania P series</span></li>
-              <li><span class="spec-label">Gru</span><span class="spec-val">Palfinger Epsilon Q150L</span></li>
-              <li><span class="spec-label">Portata gru</span><span class="spec-val">~15 tm</span></li>
-              <li><span class="spec-label">Impianto</span><span class="spec-val">Scarrabile hook-lift</span></li>
-              <li><span class="spec-label">Cassone</span><span class="spec-val">Bordi alti, verde</span></li>
-              <li><span class="spec-label">Asse</span><span class="spec-val">6×2 / 6×4</span></li>
-            </ul>
-            <div class="product-card-actions">
-              <a href="mailto:info@gruscar.it?subject=Richiesta%20informazioni%20Scania%20Palfinger%20Epsilon" class="btn btn-gold">Richiedi Info →</a>
-              <a href="contatti.html" class="btn btn-light">Contattaci</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── SLOT 2 (aggiungere foto) ── -->
-              <div class="product-card">
-          <img
-            class="product-card-img"
-            src="prodotto2.png"
-            alt="Scania con gru Palfinger Epsilon e cassone scarrabile"
-            onclick="openLightbox(this.src)"
-          />
-          <div class="product-card-body">
-            <div class="product-card-title">Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile</div>
-            <p class="product-card-desc">Allestimento completo su trattore Scania P: gru a gancio/polipo Palfinger Epsilon serie Q con braccio articolato, cassone scarrabile verde a bordi alti per la raccolta rifiuti o inerti.</p>
-            <ul class="product-specs">
-              <li><span class="spec-label">Veicolo</span><span class="spec-val">Scania P series</span></li>
-              <li><span class="spec-label">Gru</span><span class="spec-val">Palfinger Epsilon Q150L</span></li>
-              <li><span class="spec-label">Portata gru</span><span class="spec-val">~15 tm</span></li>
-              <li><span class="spec-label">Impianto</span><span class="spec-val">Scarrabile hook-lift</span></li>
-              <li><span class="spec-label">Cassone</span><span class="spec-val">Bordi alti, verde</span></li>
-              <li><span class="spec-label">Asse</span><span class="spec-val">6×2 / 6×4</span></li>
-            </ul>
-            <div class="product-card-actions">
-              <a href="mailto:info@gruscar.it?subject=Richiesta%20informazioni%20Scania%20Palfinger%20Epsilon" class="btn btn-gold">Richiedi Info →</a>
-              <a href="contatti.html" class="btn btn-light">Contattaci</a>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- ── SLOT 3 (aggiungere foto) ── -->
-            <div class="product-card">
-          <img
-            class="product-card-img"
-            src="prodotto3.png"
-            alt="Scania con gru Palfinger Epsilon e cassone scarrabile"
-            onclick="openLightbox(this.src)"
-          />
-          <div class="product-card-body">
-            <div class="product-card-title">Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile</div>
-            <p class="product-card-desc">Allestimento completo su trattore Scania P: gru a gancio/polipo Palfinger Epsilon serie Q con braccio articolato, cassone scarrabile verde a bordi alti per la raccolta rifiuti o inerti.</p>
-            <ul class="product-specs">
-              <li><span class="spec-label">Veicolo</span><span class="spec-val">Scania P series</span></li>
-              <li><span class="spec-label">Gru</span><span class="spec-val">Palfinger Epsilon Q150L</span></li>
-              <li><span class="spec-label">Portata gru</span><span class="spec-val">~15 tm</span></li>
-              <li><span class="spec-label">Impianto</span><span class="spec-val">Scarrabile hook-lift</span></li>
-              <li><span class="spec-label">Cassone</span><span class="spec-val">Bordi alti, verde</span></li>
-              <li><span class="spec-label">Asse</span><span class="spec-val">6×2 / 6×4</span></li>
-            </ul>
-            <div class="product-card-actions">
-              <a href="mailto:info@gruscar.it?subject=Richiesta%20informazioni%20Scania%20Palfinger%20Epsilon" class="btn btn-gold">Richiedi Info →</a>
-              <a href="contatti.html" class="btn btn-light">Contattaci</a>
-            </div>
-          </div>
-        </div>
-
-
-          <!-- ── SLOT 4 (aggiungere foto) ── -->
-  <div class="product-card">
-          <img
-            class="product-card-img"
-            src="prodotto4.png"
-            alt="Scania con gru Palfinger Epsilon e cassone scarrabile"
-            onclick="openLightbox(this.src)"
-          />
-          <div class="product-card-body">
-            <div class="product-card-title">Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile</div>
-            <p class="product-card-desc">Allestimento completo su trattore Scania P: gru a gancio/polipo Palfinger Epsilon serie Q con braccio articolato, cassone scarrabile verde a bordi alti per la raccolta rifiuti o inerti.</p>
-            <ul class="product-specs">
-              <li><span class="spec-label">Veicolo</span><span class="spec-val">Scania P series</span></li>
-              <li><span class="spec-label">Gru</span><span class="spec-val">Palfinger Epsilon Q150L</span></li>
-              <li><span class="spec-label">Portata gru</span><span class="spec-val">~15 tm</span></li>
-              <li><span class="spec-label">Impianto</span><span class="spec-val">Scarrabile hook-lift</span></li>
-              <li><span class="spec-label">Cassone</span><span class="spec-val">Bordi alti, verde</span></li>
-              <li><span class="spec-label">Asse</span><span class="spec-val">6×2 / 6×4</span></li>
-            </ul>
-            <div class="product-card-actions">
-              <a href="mailto:info@gruscar.it?subject=Richiesta%20informazioni%20Scania%20Palfinger%20Epsilon" class="btn btn-gold">Richiedi Info →</a>
-              <a href="contatti.html" class="btn btn-light">Contattaci</a>
-            </div>
-          </div>
-        </div
-
-      </div><!-- /products-grid -->
+      <div class="products-grid fade-in fade-in-d1" id="products-grid">
+        <!-- Le card vengono generate via JS da PRODUCTS_DATA -->
+      </div>
     </div>
   </section>
 
@@ -349,9 +588,7 @@
           <h2>Non trovi quello che cerchi?</h2>
           <p>Progettiamo e realizziamo allestimenti personalizzati su gru, impianti scarrabili e compattatori. Raccontaci le tue esigenze: ti risponderemo con una proposta tecnica su misura.</p>
           <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;">
-            <a href="mailto:info@gruscar.it?subject=Richiesta%20Progetto%20Personalizzato" class="btn btn-gold btn-lg">
-              Scrivi a info@gruscar.it →
-            </a>
+            <a href="mailto:info@gruscar.it?subject=Richiesta%20Progetto%20Personalizzato" class="btn btn-gold btn-lg">Scrivi a info@gruscar.it →</a>
             <a href="contatti.html" class="btn btn-light btn-lg">Modulo Contatto</a>
           </div>
         </div>
@@ -369,26 +606,340 @@
     </div>
   </section>
 
-  <!-- Lightbox -->
+  <!-- ═══ MODAL ═══ -->
+  <div class="modal-backdrop" id="modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" onclick="closeModal()" title="Chiudi">✕</button>
+
+      <!-- Gallery -->
+      <div class="modal-gallery">
+        <div class="gallery-main" id="gallery-main">
+          <img id="gallery-main-img" src="" alt="Immagine prodotto" onclick="openLightbox(this.src)">
+          <button class="gallery-nav prev" id="gallery-prev" onclick="galleryNav(-1)">&#8592;</button>
+          <button class="gallery-nav next" id="gallery-next" onclick="galleryNav(1)">&#8594;</button>
+          <div class="gallery-counter" id="gallery-counter">1 / 1</div>
+        </div>
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="modal-content">
+          <div id="modal-badge" class="modal-badge"></div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <div class="modal-desc" id="modal-desc"></div>
+
+          <div class="modal-section-label">Specifiche Tecniche</div>
+          <ul class="modal-specs" id="modal-specs"></ul>
+
+          <div class="modal-section-label">Caratteristiche principali</div>
+          <ul class="modal-highlights" id="modal-highlights"></ul>
+        </div>
+
+        <div class="modal-sidebar">
+          <div>
+            <div class="modal-sidebar-title">Interessato a questo prodotto?</div>
+            <p style="margin-top:.5rem;">Contattaci per ricevere ulteriori informazioni, documentazione tecnica o per fissare una visita.</p>
+          </div>
+          <div class="modal-cta-group" id="modal-cta"></div>
+          <div class="modal-info-pills">
+            <div class="info-pill">
+              <div class="info-pill-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9v-2h2v2zm0-4H9V7h2v2z"/></svg>
+              </div>
+              <span>Verifica tecnica prima della consegna</span>
+            </div>
+            <div class="info-pill">
+              <div class="info-pill-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+              </div>
+              <span>Documentazione e collaudi disponibili</span>
+            </div>
+            <div class="info-pill">
+              <div class="info-pill-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+              </div>
+              <span>Risposta entro 24 ore lavorative</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Lightbox -->
   <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <img id="lightbox-img" src="" alt="Prodotto ingrandito">
+    <img id="lightbox-img" src="" alt="Immagine ingrandita">
   </div>
 
   <footer id="site-footer"></footer>
   <script src="main.js"></script>
   <script src="components.js"></script>
   <script>
+    /* ═══════════════════════════════════════════════════
+       DATI PRODOTTI
+       Per aggiungere un prodotto: copia un oggetto e
+       modifica i campi. "images" è un array di percorsi.
+       ═══════════════════════════════════════════════════ */
+    const PRODUCTS_DATA = [
+      {
+        id: 1,
+        badge: "Nuovo",
+        badgeClass: "",
+        title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
+        shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
+        fullDesc: `
+          <p>Allestimento completo su trattore <strong>Scania P series</strong>: gru a gancio/polipo <strong>Palfinger Epsilon serie Q</strong> con braccio articolato ad alte prestazioni, ideale per la movimentazione di materiali voluminosi o pesanti.</p>
+          <p>Il cassone scarrabile a bordi alti verniciato verde è dimensionato per la raccolta di rifiuti ingombranti, inerti da demolizione e materiali da cantiere. Il sistema hook-lift garantisce tempi di carico/scarico rapidi e operatività in spazi ristretti.</p>
+          <p>Il mezzo è stato sottoposto a verifica completa da parte del nostro team tecnico: impianto idraulico, frenata, gomme e struttura portante sono stati controllati e certificati.</p>
+        `,
+        highlights: [
+          "Braccio Epsilon Q con rotatore e polipo idraulico incluso",
+          "Sistema scarrabile hook-lift omologato",
+          "Cassone bordi alti 2.5 m, vol. utile ~20 m³",
+          "Revisione completa documentata",
+          "Disponibilità immediata"
+        ],
+        specs: [
+          { label: "Veicolo",      val: "Scania P series" },
+          { label: "Gru",          val: "Palfinger Epsilon Q150L" },
+          { label: "Portata gru",  val: "~15 tm" },
+          { label: "Impianto",     val: "Scarrabile hook-lift" },
+          { label: "Cassone",      val: "Bordi alti, verde" },
+          { label: "Asse",         val: "6×2 / 6×4" },
+          { label: "Anno",         val: "2021" },
+          { label: "Km",          val: "Su richiesta" }
+        ],
+        images: ["prodotto1.jpg", "prodotto1b.jpg", "prodotto1c.jpg"],
+        mailSubject: "Richiesta%20informazioni%20Scania%20Palfinger%20Epsilon"
+      },
+      {
+        id: 2,
+        badge: "Usato Selezionato",
+        badgeClass: "used",
+        title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
+        shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
+        fullDesc: `
+          <p>Allestimento completo su trattore <strong>Scania P series</strong>: gru a gancio/polipo <strong>Palfinger Epsilon serie Q</strong> con braccio articolato ad alte prestazioni.</p>
+          <p>Ottimo stato di conservazione. Storico manutenzione disponibile. Ideale per imprese che cercano un allestimento affidabile a un costo contenuto.</p>
+        `,
+        highlights: [
+          "Storico manutenzione completo",
+          "Pneumatici sostituiti di recente",
+          "Impianto idraulico revisionato",
+          "Pronto alla consegna"
+        ],
+        specs: [
+          { label: "Veicolo",      val: "Scania P series" },
+          { label: "Gru",          val: "Palfinger Epsilon Q150L" },
+          { label: "Portata gru",  val: "~15 tm" },
+          { label: "Impianto",     val: "Scarrabile hook-lift" },
+          { label: "Cassone",      val: "Bordi alti, verde" },
+          { label: "Asse",         val: "6×2 / 6×4" },
+          { label: "Anno",         val: "2018" },
+          { label: "Km",          val: "Su richiesta" }
+        ],
+        images: ["prodotto2.png", "prodotto2b.png"],
+        mailSubject: "Richiesta%20informazioni%20Prodotto%202"
+      },
+      {
+        id: 3,
+        badge: "Nuovo",
+        badgeClass: "",
+        title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
+        shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
+        fullDesc: `
+          <p>Allestimento completo su trattore <strong>Scania P series</strong>: gru a gancio/polipo <strong>Palfinger Epsilon serie Q</strong> con braccio articolato.</p>
+          <p>Cassone scarrabile verde a bordi alti per la raccolta rifiuti o inerti. Mezzo verificato e pronto alla consegna.</p>
+        `,
+        highlights: [
+          "Braccio articolato Epsilon Q",
+          "Cassone bordi alti incluso",
+          "Verifica tecnica eseguita",
+          "Documentazione completa"
+        ],
+        specs: [
+          { label: "Veicolo",      val: "Scania P series" },
+          { label: "Gru",          val: "Palfinger Epsilon Q150L" },
+          { label: "Portata gru",  val: "~15 tm" },
+          { label: "Impianto",     val: "Scarrabile hook-lift" },
+          { label: "Cassone",      val: "Bordi alti, verde" },
+          { label: "Asse",         val: "6×2 / 6×4" },
+          { label: "Anno",         val: "2022" },
+          { label: "Km",          val: "Su richiesta" }
+        ],
+        images: ["prodotto3.png"],
+        mailSubject: "Richiesta%20informazioni%20Prodotto%203"
+      },
+      {
+        id: 4,
+        badge: "Usato Selezionato",
+        badgeClass: "used",
+        title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
+        shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
+        fullDesc: `
+          <p>Allestimento completo su trattore <strong>Scania P series</strong>: gru a gancio/polipo <strong>Palfinger Epsilon serie Q</strong>.</p>
+          <p>Mezzo usato in ottimo stato, revisione documentata e pronto alla consegna immediata.</p>
+        `,
+        highlights: [
+          "Revisione documentata",
+          "Impianto idraulico in perfette condizioni",
+          "Disponibilità immediata"
+        ],
+        specs: [
+          { label: "Veicolo",      val: "Scania P series" },
+          { label: "Gru",          val: "Palfinger Epsilon Q150L" },
+          { label: "Portata gru",  val: "~15 tm" },
+          { label: "Impianto",     val: "Scarrabile hook-lift" },
+          { label: "Cassone",      val: "Bordi alti, verde" },
+          { label: "Asse",         val: "6×2 / 6×4" },
+          { label: "Anno",         val: "2019" },
+          { label: "Km",          val: "Su richiesta" }
+        ],
+        images: ["prodotto4.png"],
+        mailSubject: "Richiesta%20informazioni%20Prodotto%204"
+      }
+    ];
+
+    /* ─── Render cards ─── */
+    (function renderCards() {
+      const grid = document.getElementById('products-grid');
+      PRODUCTS_DATA.forEach(p => {
+        const imgCount = p.images.length;
+        grid.insertAdjacentHTML('beforeend', `
+          <div class="product-card" onclick="openModal(${p.id})">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="${p.images[0]}" alt="${p.title}" loading="lazy">
+              <div class="product-card-img-overlay">
+                <span class="product-card-img-overlay-label">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm2 0v10h8V5H6zm2 2h4v2H8V7zm0 4h4v2H8v-2z"/></svg>
+                  Vedi dettagli completi
+                </span>
+              </div>
+              ${imgCount > 1 ? `<div class="product-img-count">📷 ${imgCount} foto</div>` : ''}
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge ${p.badgeClass}">${p.badge}</span>
+              <div class="product-card-title">${p.title}</div>
+              <p class="product-card-desc-short">${p.shortDesc}</p>
+              <div class="product-specs-mini">
+                ${p.specs.slice(0,4).map(s => `<span class="spec-chip">${s.label}: ${s.val}</span>`).join('')}
+              </div>
+              <div class="product-card-cta">
+                <button class="btn-detail">Scopri di più →</button>
+                <a href="mailto:info@gruscar.it?subject=${p.mailSubject}" class="btn-contact-small" onclick="event.stopPropagation()">Contattaci</a>
+              </div>
+            </div>
+          </div>
+        `);
+      });
+    })();
+
+    /* ─── Modal logic ─── */
+    let currentProduct = null;
+    let currentImgIndex = 0;
+
+    function openModal(id) {
+      const p = PRODUCTS_DATA.find(x => x.id === id);
+      if (!p) return;
+      currentProduct = p;
+      currentImgIndex = 0;
+
+      // Badge
+      const badge = document.getElementById('modal-badge');
+      badge.textContent = p.badge;
+      badge.className = 'modal-badge' + (p.badgeClass ? ' ' + p.badgeClass : '');
+
+      document.getElementById('modal-title').textContent = p.title;
+      document.getElementById('modal-desc').innerHTML = p.fullDesc;
+
+      // Specs
+      const specsList = document.getElementById('modal-specs');
+      specsList.innerHTML = p.specs.map(s =>
+        `<li><span class="spec-label">${s.label}</span><span class="spec-val">${s.val}</span></li>`
+      ).join('');
+
+      // Highlights
+      const hl = document.getElementById('modal-highlights');
+      hl.innerHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
+
+      // CTA
+      document.getElementById('modal-cta').innerHTML = `
+        <a href="mailto:info@gruscar.it?subject=${p.mailSubject}" class="btn-modal-primary">Richiedi Informazioni →</a>
+        <a href="contatti.html" class="btn-modal-secondary">Modulo di contatto</a>
+      `;
+
+      buildGallery(p.images);
+
+      document.getElementById('modal-backdrop').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function buildGallery(images) {
+      setGalleryImage(0);
+      const thumbs = document.getElementById('gallery-thumbs');
+      thumbs.innerHTML = '';
+      if (images.length <= 1) {
+        thumbs.style.display = 'none';
+      } else {
+        thumbs.style.display = 'flex';
+        images.forEach((src, i) => {
+          const div = document.createElement('div');
+          div.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+          div.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy">`;
+          div.onclick = () => setGalleryImage(i);
+          thumbs.appendChild(div);
+        });
+      }
+    }
+
+    function setGalleryImage(index) {
+      const images = currentProduct.images;
+      currentImgIndex = Math.max(0, Math.min(index, images.length - 1));
+      document.getElementById('gallery-main-img').src = images[currentImgIndex];
+      document.getElementById('gallery-counter').textContent = `${currentImgIndex + 1} / ${images.length}`;
+      document.getElementById('gallery-prev').classList.toggle('hidden', currentImgIndex === 0);
+      document.getElementById('gallery-next').classList.toggle('hidden', currentImgIndex === images.length - 1);
+      document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+        t.classList.toggle('active', i === currentImgIndex);
+      });
+    }
+
+    function galleryNav(dir) {
+      setGalleryImage(currentImgIndex + dir);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.remove('active');
+      document.body.style.overflow = '';
+      currentProduct = null;
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target === document.getElementById('modal-backdrop')) closeModal();
+    }
+
+    /* ─── Lightbox (fullscreen da modal) ─── */
     function openLightbox(src) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
     }
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('active');
-      document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* ─── Keyboard ─── */
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('lightbox').classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
+      if (!document.getElementById('modal-backdrop').classList.contains('active')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') galleryNav(-1);
+      if (e.key === 'ArrowRight') galleryNav(1);
+    });
   </script>
 </body>
 </html>
