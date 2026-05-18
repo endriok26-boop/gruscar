@@ -306,9 +306,9 @@ function injectAdminUI() {
 /* ── INIT COMPONENTI ─────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   injectNavbar();
+  injectAdminUI();
   injectMobileNav();
   injectFooter();
-  injectAdminUI();
   // Ri-aggancia admin tab listener dopo injection
   document.querySelectorAll('.admin-tab').forEach(btn => {
     btn.addEventListener('click', function() {
