@@ -7,9 +7,144 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body.about-page {
+      background: transparent;
+      position: relative;
+    }
+    .about-page-bg {
+      position: fixed;
+      top: var(--nav-h);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url('sfondo2.png') center center/cover no-repeat;
+      z-index: 0;
+    }
+    .about-page-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 37, 64, 0.5);
+    }
+    .about-page > *:not(.about-page-bg) {
+      position: relative;
+      z-index: 1;
+    }
+    .about-page .page-header {
+      background: rgba(237, 244, 251, 0.76);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: rgba(199, 211, 232, 0.55);
+    }
+    .about-hero-pin {
+      height: 180vh;
+      position: relative;
+      background: transparent;
+    }
+    .about-hero-sticky {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      overflow: hidden;
+    }
+    .about-hero-visual {
+      position: relative;
+      height: 100%;
+      background: transparent;
+    }
+    .about-hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 37, 64, 0.08), rgba(16, 37, 64, 0.72));
+    }
+    .about-hero-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 4rem;
+      color: #fff;
+    }
+    .about-hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.76);
+      margin-bottom: 1rem;
+    }
+    .about-hero-content h2 {
+      color: #fff;
+      max-width: 720px;
+      margin-bottom: 1rem;
+    }
+    .about-hero-content p {
+      max-width: 620px;
+      color: rgba(255,255,255,0.84);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+    .about-intro-copy {
+      max-width: 780px;
+    }
+    .about-page .section-alt,
+    .about-page .stat-box,
+    .about-page .offer-card,
+    .about-page .about-feat {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .about-page .section-alt {
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .about-page .about-feat {
+      padding: 1.2rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.38);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 1024px) {
+      .about-hero-pin {
+        height: 150vh;
+      }
+    }
+    @media (max-width: 768px) {
+      .about-hero-pin {
+        height: auto;
+      }
+      .about-hero-sticky {
+        position: relative;
+        top: auto;
+        height: 68vh;
+        min-height: 420px;
+      }
+      .about-hero-content {
+        padding-bottom: 2.5rem;
+      }
+      .about-page-bg {
+        top: 0;
+      }
+    }
+    @media (max-width: 640px) {
+      .about-hero-sticky {
+        height: 56vh;
+        min-height: 340px;
+      }
+      .about-hero-content p {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="about-page">
   <header id="navbar"></header>
+  <div class="about-page-bg" aria-hidden="true"></div>
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -24,11 +159,23 @@
     </div>
   </div>
 
+  <!-- ════════════ HERO STICKY ════════════ -->
+  <section class="about-hero-pin">
+    <div class="about-hero-sticky">
+      <div class="about-hero-visual">
+        <div class="container about-hero-content fade-in">
+          <div class="about-hero-eyebrow">Chi Siamo</div>
+          <h2>Da oltre 60 anni al fianco di chi lavora con gru e mezzi speciali.</h2>
+          <p>Esperienza tecnica, officina e allestimenti su misura per accompagnare ogni progetto con competenza, continuità e attenzione al lavoro sul campo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════════════ INTRO ════════════ -->
   <section class="section section-alt">
     <div class="container">
-      <div class="grid-2 fade-in" style="align-items:center;gap:5rem;">
-        <div>
+      <div class="fade-in about-intro-copy">
           <span class="section-tag">La Nostra Missione</span>
           <h2>Esperienza e innovazione <br>nel mondo delle <em style="color:var(--gold);">gru.</em></h2>
           <div class="divider"></div>
@@ -39,22 +186,6 @@
             <a href="cosa-offriamo.html" class="btn btn-gold">I Nostri Servizi →</a>
             <a href="contatti.html" class="btn btn-outline">Contattaci</a>
           </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          <!-- IMMAGINI CHI SIAMO — sostituisci con <img src="..." alt="..."> -->
-          <div class="img-ph" style="height:270px;border-radius:var(--radius-lg);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Foto Team/Sede</span>
-          </div>
-          <div class="img-ph" style="height:270px;margin-top:2rem;border-radius:var(--radius-lg);">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Foto Showroom</span>
-          </div>
-          <div class="img-ph" style="height:160px;border-radius:var(--radius-lg);grid-column:span 2;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <span>Foto Magazzino / Panoramica</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
