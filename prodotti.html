@@ -96,21 +96,6 @@
       display: flex;
       flex-direction: column;
     }
-    .product-badge {
-      display: inline-block;
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold, #b8975a);
-      background: rgba(184,151,90,.1);
-      border: 1px solid rgba(184,151,90,.25);
-      border-radius: 20px;
-      padding: .25rem .75rem;
-      margin-bottom: .9rem;
-    }
-    .product-badge.used { color: #7a9a72; background: rgba(122,154,114,.1); border-color: rgba(122,154,114,.25); }
-
     .product-card-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.2rem;
@@ -319,19 +304,6 @@
       .modal-content { padding: 1.75rem 1.5rem; border-right: none; }
     }
 
-    .modal-badge {
-      display: inline-block;
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold, #b8975a);
-      background: rgba(184,151,90,.1);
-      border: 1px solid rgba(184,151,90,.25);
-      border-radius: 20px;
-      padding: .25rem .75rem;
-      margin-bottom: 1rem;
-    }
     .modal-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.65rem;
@@ -625,7 +597,6 @@
       <!-- Body -->
       <div class="modal-body">
         <div class="modal-content">
-          <div id="modal-badge" class="modal-badge"></div>
           <h2 class="modal-title" id="modal-title"></h2>
           <div class="modal-desc" id="modal-desc"></div>
 
@@ -685,8 +656,6 @@
     const PRODUCTS_DATA = [
       {
         id: 1,
-        badge: "Nuovo",
-        badgeClass: "",
         title: "Scania G660 + Multilift ULTIMA 26Z + Pa",
         shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
         fullDesc: `
@@ -716,8 +685,6 @@
       },
       {
         id: 2,
-        badge: "Usato Selezionato",
-        badgeClass: "used",
         title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
         shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
         fullDesc: `
@@ -745,8 +712,6 @@
       },
       {
         id: 3,
-        badge: "Nuovo",
-        badgeClass: "",
         title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
         shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
         fullDesc: `
@@ -774,8 +739,6 @@
       },
       {
         id: 4,
-        badge: "Usato Selezionato",
-        badgeClass: "used",
         title: "Scania P + Palfinger Epsilon Q150L + Cassone Scarrabile",
         shortDesc: "Allestimento completo su Scania P con gru articolata e cassone scarrabile a bordi alti.",
         fullDesc: `
@@ -820,7 +783,6 @@
               ${imgCount > 1 ? `<div class="product-img-count">📷 ${imgCount} foto</div>` : ''}
             </div>
             <div class="product-card-body">
-              <span class="product-badge ${p.badgeClass}">${p.badge}</span>
               <div class="product-card-title">${p.title}</div>
               <p class="product-card-desc-short">${p.shortDesc}</p>
               <div class="product-specs-mini">
@@ -845,11 +807,6 @@
       if (!p) return;
       currentProduct = p;
       currentImgIndex = 0;
-
-      // Badge
-      const badge = document.getElementById('modal-badge');
-      badge.textContent = p.badge;
-      badge.className = 'modal-badge' + (p.badgeClass ? ' ' + p.badgeClass : '');
 
       document.getElementById('modal-title').textContent = p.title;
       document.getElementById('modal-desc').innerHTML = p.fullDesc;
