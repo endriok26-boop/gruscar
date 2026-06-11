@@ -119,7 +119,7 @@ function injectFooter() {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">© 2025 GRU SCAR SRL — P.IVA 00000000000 — Tel. +39 059 928294</div>
+        <div class="footer-copy">© 2025 GRU SCAR SRL — P.IVA 03113490365 — Tel. +39 059 928294</div>
         <div class="footer-legal">
           <a href="#" onclick="openAdminLogin();return false;">🔒 Area Admin</a>
           <a href="https://www.iubenda.com/privacy-policy/58599161/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed" title="Cookie Policy">Cookie</a>
