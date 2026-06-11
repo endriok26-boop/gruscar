@@ -51,263 +51,268 @@
 <body>
   <header id="navbar"></header>
 
-  <div class="page-header">
-    <div class="container page-header-inner">
-      <span class="section-tag">Vendi con Noi</span>
-      <h1>Vendi il tuo Usato</h1>
-      <div class="breadcrumb">
-        <a href="index.html">Home</a><span>›</span>
-        <a href="usato.html">Usato</a><span>›</span>
-        <span>Vendi</span>
-      </div>
-    </div>
-  </div>
+  <!-- Contenuto originale disattivato -->
+  <template id="vendi-usato-original">
+    <header id="navbar"></header>
 
-  <!-- ════════════ COME FUNZIONA ════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width:560px;margin:0 auto 4rem;">
-        <span class="section-tag">Il Processo</span>
-        <h2>Come Funziona</h2>
-        <div class="divider-center"></div>
-        <p style="color:var(--text-muted);">Vendere il tuo usato con noi è semplice. Tutto avviene via email: nessun account richiesto, massima semplicità.</p>
-      </div>
-      <div class="grid-2 fade-in fade-in-d1" style="gap:1rem;max-width:800px;margin:0 auto;">
-        <div class="how-card">
-          <div class="how-num">1</div>
-          <div>
-            <h4 style="margin-bottom:.4rem;">Compila il Modulo</h4>
-            <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Inserisci i dettagli del tuo articolo: nome, prezzo desiderato, condizioni e una descrizione accurata. Più dettagli fornisci, meglio è.</p>
-          </div>
-        </div>
-        <div class="how-card">
-          <div class="how-num">2</div>
-          <div>
-            <h4 style="margin-bottom:.4rem;">Email Automatica al Team</h4>
-            <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Cliccando "Invia via Email" si aprirà il tuo client di posta con tutti i dettagli già compilati. Allega le foto del tuo articolo e invia.</p>
-          </div>
-        </div>
-        <div class="how-card">
-          <div class="how-num">3</div>
-          <div>
-            <h4 style="margin-bottom:.4rem;">Trattiamo via Email</h4>
-            <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Il nostro team valuterà la tua proposta e ti risponderà per concordare il prezzo definitivo, le modalità di consegna e pagamento.</p>
-          </div>
-        </div>
-        <div class="how-card">
-          <div class="how-num">4</div>
-          <div>
-            <h4 style="margin-bottom:.4rem;">Pubblicazione</h4>
-            <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Raggiunto l'accordo, pubblicheremo il tuo articolo sul sito e riceverai il pagamento concordato.</p>
-          </div>
+    <div class="page-header">
+      <div class="container page-header-inner">
+        <span class="section-tag">Vendi con Noi</span>
+        <h1>Vendi il tuo Usato</h1>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a><span>›</span>
+          <a href="usato.html">Usato</a><span>›</span>
+          <span>Vendi</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ════════════ FORM VENDI ════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width:500px;margin:0 auto 3rem;">
-        <span class="section-tag">Inizia Ora</span>
-        <h2>Compila il Modulo</h2>
-        <div class="divider-center"></div>
-        <p style="color:var(--text-muted);font-size:.9rem;">Compila tutti i campi. Cliccando il pulsante si aprirà il tuo programma email con tutte le informazioni già inserite — ricordati di allegare le foto!</p>
-      </div>
-
-      <div class="sell-form-wrap fade-in fade-in-d1">
-        <!-- FORM STEP -->
-        <div id="sellFormContent">
-          <h3 style="margin-bottom:.25rem;">Dati dell'Articolo</h3>
-          <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:2rem;">I campi contrassegnati con * sono obbligatori.</p>
-
-          <div class="grid-2">
-            <div class="form-group">
-              <label class="form-label">Il tuo Nome *</label>
-              <input class="form-input" id="sNome" type="text" placeholder="Mario Rossi" maxlength="80">
-            </div>
-            <div class="form-group">
-              <label class="form-label">La tua Email *</label>
-              <input class="form-input" id="sEmail" type="email" placeholder="mario@email.com" maxlength="120">
-              <div class="form-hint">Riceverai la risposta su questa email</div>
-            </div>
-          </div>
-          <div class="grid-2">
-            <div class="form-group">
-              <label class="form-label">Telefono (opzionale)</label>
-              <input class="form-input" id="sTelefono" type="tel" placeholder="+39 059 928294" maxlength="20">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Categoria Articolo *</label>
-              <select class="form-input" id="sCategoria">
-                <option value="">Seleziona categoria…</option>
-                <option>Categoria 1</option>
-                <option>Categoria 2</option>
-                <option>Categoria 3</option>
-                <option>Altro</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Nome dell'Articolo *</label>
-            <input class="form-input" id="sArticolo" type="text" placeholder="es. Nome modello e anno" maxlength="120">
-          </div>
-          <div class="grid-2">
-            <div class="form-group">
-              <label class="form-label">Prezzo Desiderato (€) *</label>
-              <input class="form-input" id="sPrezzo" type="number" placeholder="es. 150" min="0" max="99999">
-              <div class="form-hint">Il prezzo definitivo sarà concordato via email</div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Condizioni dell'Articolo</label>
-              <select class="form-input" id="sCondizioni">
-                <option value="Ottime">Ottime — Come nuovo</option>
-                <option value="Buone">Buone — Qualche segno d'uso</option>
-                <option value="Usato">Usato — Segni d'uso visibili</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Descrizione Dettagliata *</label>
-            <textarea class="form-input" id="sDescrizione" placeholder="Descrivi l'articolo: anno di acquisto, stato, accessori inclusi, motivo della vendita, eventuali difetti…" maxlength="1500" style="min-height:140px;"></textarea>
-          </div>
-
-          <!-- FOTO UPLOAD -->
-          <div class="form-group">
-            <label class="form-label">Foto dell'Articolo *</label>
-            <label for="sFoto" class="img-ph" style="height:90px;border-radius:var(--radius);gap:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;border:1.5px dashed var(--border);background:var(--surface);transition:var(--transition);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <span>Seleziona le foto da allegare</span>
-            </label>
-            <input type="file" id="sFoto" multiple accept="image/*" style="display:none;">
-            <div id="fotoPreview" style="margin-top:0.5rem;font-size:.85rem;color:var(--text-muted);"></div>
-            <div class="form-hint">Consigliamo almeno 4 foto (fronte, retro, lati, eventuali difetti). Formati: JPG, PNG. Max 10MB ciascuna.</div>
-          </div>
-
-          <div class="form-group">
-            <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;font-size:.85rem;color:var(--text-muted);">
-              <input type="checkbox" id="sPrivacy" style="margin-top:3px;width:16px;height:16px;cursor:pointer;accent-color:var(--gold);">
-              <span>Accetto la <a href="https://www.iubenda.com/privacy-policy/58599161" target="_blank" rel="noopener" class="text-gold">Privacy Policy</a> e i <a href="termini-e-condizioni.html" class="text-gold" style="font-weight:600;">Termini di Servizio</a>. I miei dati saranno utilizzati esclusivamente per gestire questa richiesta di vendita. *</span>
-            </label>
-          </div>
-
-          <!-- INFO BOX -->
-          <div style="background:var(--gold-bg);border:1.5px solid var(--gold-border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.5rem;font-size:.85rem;color:var(--text-muted);">
-            <strong style="color:var(--gold);">📧 Come funziona il pulsante:</strong> Cliccando "Invia via Email" si aprirà il tuo programma di posta elettronica (Outlook, Gmail, Apple Mail…) con il messaggio già compilato, inclusi i nomi delle foto selezionate. Allega le foto corrispondenti e invia. Riceverai risposta entro 24–48 ore lavorative.
-          </div>
-
-          <button class="btn btn-gold btn-lg w-full" onclick="sendSellEmail()" style="justify-content:center;">
-            ✉ Apri Email e Invia →
-          </button>
+    <!-- ════════════ COME FUNZIONA ════════════ -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="text-center fade-in" style="max-width:560px;margin:0 auto 4rem;">
+          <span class="section-tag">Il Processo</span>
+          <h2>Come Funziona</h2>
+          <div class="divider-center"></div>
+          <p style="color:var(--text-muted);">Vendere il tuo usato con noi è semplice. Tutto avviene via email: nessun account richiesto, massima semplicità.</p>
         </div>
-
-        <!-- SUCCESS STATE -->
-        <div id="sellSuccess" class="hidden success-box">
-          <div class="success-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div class="grid-2 fade-in fade-in-d1" style="gap:1rem;max-width:800px;margin:0 auto;">
+          <div class="how-card">
+            <div class="how-num">1</div>
+            <div>
+              <h4 style="margin-bottom:.4rem;">Compila il Modulo</h4>
+              <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Inserisci i dettagli del tuo articolo: nome, prezzo desiderato, condizioni e una descrizione accurata. Più dettagli fornisci, meglio è.</p>
+            </div>
           </div>
-          <h3 style="margin-bottom:.75rem;">Email Pronta!</h3>
-          <p style="color:var(--text-muted);font-size:.92rem;margin-bottom:.75rem;">Il tuo client di posta è stato aperto con tutti i dettagli già inseriti.</p>
-          <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:2rem;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;"><strong>Ricordati di allegare le foto</strong> del tuo articolo prima di inviare. Risponderemo entro 24–48 ore lavorative.</p>
-          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-            <button class="btn btn-outline" onclick="resetSellForm()">Invia un altro Articolo</button>
-            <a href="usato.html" class="btn btn-gold">Vedi Articoli Usati →</a>
+          <div class="how-card">
+            <div class="how-num">2</div>
+            <div>
+              <h4 style="margin-bottom:.4rem;">Email Automatica al Team</h4>
+              <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Cliccando "Invia via Email" si aprirà il tuo client di posta con tutti i dettagli già compilati. Allega le foto del tuo articolo e invia.</p>
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-num">3</div>
+            <div>
+              <h4 style="margin-bottom:.4rem;">Trattiamo via Email</h4>
+              <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Il nostro team valuterà la tua proposta e ti risponderà per concordare il prezzo definitivo, le modalità di consegna e pagamento.</p>
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-num">4</div>
+            <div>
+              <h4 style="margin-bottom:.4rem;">Pubblicazione</h4>
+              <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;">Raggiunto l'accordo, pubblicheremo il tuo articolo sul sito. Quando verrà venduto, riceverai il pagamento concordato.</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ════════════ FAQ ════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width:500px;margin:0 auto 3rem;">
-        <span class="section-tag">Domande Frequenti</span>
-        <h2>FAQ</h2>
-        <div class="divider-center"></div>
-      </div>
-      <div style="max-width:700px;margin:0 auto;" class="fade-in fade-in-d1">
-        <div style="border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
-          <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
-            <strong>Quanto tempo impiega la valutazione?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
-          </div>
-          <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">La valutazione tecnica viene eseguita entro 24-48 ore lavorative e comprende controlli su struttura, impianto e attrezzature collegate.</div>
+    <!-- ════════════ FORM VENDI ════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center fade-in" style="max-width:500px;margin:0 auto 3rem;">
+          <span class="section-tag">Inizia Ora</span>
+          <h2>Compila il Modulo</h2>
+          <div class="divider-center"></div>
+          <p style="color:var(--text-muted);font-size:.9rem;">Compila tutti i campi. Cliccando il pulsante si aprirà il tuo programma email con tutte le informazioni già inserite — ricordati di allegare le foto!</p>
+        </div>
 
-          <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
-            <strong>Quanto prendo per la vendita?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
-          </div>
-          <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">L’offerta è basata sulla condizione tecnica, sulla funzionalità dell’impianto e sul valore di mercato dei mezzi usati simili.</div>
+        <div class="sell-form-wrap fade-in fade-in-d1">
+          <!-- FORM STEP -->
+          <div id="sellFormContent">
+            <h3 style="margin-bottom:.25rem;">Dati dell'Articolo</h3>
+            <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:2rem;">I campi contrassegnati con * sono obbligatori.</p>
 
-          <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
-            <strong>Che tipi di articoli accettate?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
-          </div>
-          <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">Accettiamo camion usati, gru, impianti scarrabili e sistemi di compattazione. Valutiamo anche modifiche e allestimenti speciali.</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Il tuo Nome *</label>
+                <input class="form-input" id="sNome" type="text" placeholder="Mario Rossi" maxlength="80">
+              </div>
+              <div class="form-group">
+                <label class="form-label">La tua Email *</label>
+                <input class="form-input" id="sEmail" type="email" placeholder="mario@email.com" maxlength="120">
+                <div class="form-hint">Riceverai la risposta su questa email</div>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Telefono (opzionale)</label>
+                <input class="form-input" id="sTelefono" type="tel" placeholder="+39 059 928294" maxlength="20">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Categoria Articolo *</label>
+                <select class="form-input" id="sCategoria">
+                  <option value="">Seleziona categoria…</option>
+                  <option>Categoria 1</option>
+                  <option>Categoria 2</option>
+                  <option>Categoria 3</option>
+                  <option>Altro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nome dell'Articolo *</label>
+              <input class="form-input" id="sArticolo" type="text" placeholder="es. Nome modello e anno" maxlength="120">
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Prezzo Desiderato (€) *</label>
+                <input class="form-input" id="sPrezzo" type="number" placeholder="es. 150" min="0" max="99999">
+                <div class="form-hint">Il prezzo definitivo sarà concordato via email</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Condizioni dell'Articolo</label>
+                <select class="form-input" id="sCondizioni">
+                  <option value="Ottime">Ottime — Come nuovo</option>
+                  <option value="Buone">Buone — Qualche segno d'uso</option>
+                  <option value="Usato">Usato — Segni d'uso visibili</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Descrizione Dettagliata *</label>
+              <textarea class="form-input" id="sDescrizione" placeholder="Descrivi l'articolo: anno di acquisto, stato, accessori inclusi, motivo della vendita, eventuali difetti…" maxlength="1500" style="min-height:140px;"></textarea>
+            </div>
 
-          <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
-            <strong>Come ricevo il pagamento?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
-          </div>
-          <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">Il pagamento è concordato in fase di offerta e può essere effettuato secondo le modalità definite insieme, anche con anticipo al ritiro.</div>
+            <!-- FOTO UPLOAD -->
+            <div class="form-group">
+              <label class="form-label">Foto dell'Articolo *</label>
+              <label for="sFoto" class="img-ph" style="height:90px;border-radius:var(--radius);gap:.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;border:1.5px dashed var(--border);background:var(--surface);transition:var(--transition);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Seleziona le foto da allegare</span>
+              </label>
+              <input type="file" id="sFoto" multiple accept="image/*" style="display:none;">
+              <div id="fotoPreview" style="margin-top:0.5rem;font-size:.85rem;color:var(--text-muted);"></div>
+              <div class="form-hint">Consigliamo almeno 4 foto (fronte, retro, lati, eventuali difetti). Formati: JPG, PNG. Max 10MB ciascuna.</div>
+            </div>
 
-          <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
-            <strong>Devo portare fisicamente l'articolo?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
+            <div class="form-group">
+              <label style="display:flex;align-items:flex-start;gap:.65rem;cursor:pointer;font-size:.85rem;color:var(--text-muted);">
+                <input type="checkbox" id="sPrivacy" style="margin-top:3px;width:16px;height:16px;cursor:pointer;accent-color:var(--gold);">
+                <span>Accetto la <a href="https://www.iubenda.com/privacy-policy/58599161" target="_blank" rel="noopener" class="text-gold">Privacy Policy</a> e i <a href="termini-e-condizioni.html" class="text-gold" style="font-weight:600;">Termini di Servizio</a>. I miei dati saranno utilizzati esclusivamente per gestire questa richiesta di vendita. *</span>
+              </label>
+            </div>
+
+            <!-- INFO BOX -->
+            <div style="background:var(--gold-bg);border:1.5px solid var(--gold-border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.5rem;font-size:.85rem;color:var(--text-muted);">
+              <strong style="color:var(--gold);">📧 Come funziona il pulsante:</strong> Cliccando "Invia via Email" si aprirà il tuo programma di posta elettronica (Outlook, Gmail, Apple Mail…) con il messaggio già compilato, inclusi i nomi delle foto selezionate. Allega le foto corrispondenti e invia. Riceverai risposta entro 24–48 ore lavorative.
+            </div>
+
+            <button class="btn btn-gold btn-lg w-full" onclick="sendSellEmail()" style="justify-content:center;">
+              ✉ Apri Email e Invia →
+            </button>
           </div>
-          <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);">Possiamo organizzare il ritiro o la logistica del mezzo insieme ai nostri partner, così da velocizzare la transazione.</div>
+
+          <!-- SUCCESS STATE -->
+          <div id="sellSuccess" class="hidden success-box">
+            <div class="success-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 style="margin-bottom:.75rem;">Email Pronta!</h3>
+            <p style="color:var(--text-muted);font-size:.92rem;margin-bottom:.75rem;">Il tuo client di posta è stato aperto con tutti i dettagli già inseriti.</p>
+            <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:2rem;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;"><strong>Ricordati di allegare le foto</strong> del tuo articolo prima di inviare. Risponderemo entro 24–48 ore lavorative.</p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+              <button class="btn btn-outline" onclick="resetSellForm()">Invia un altro Articolo</button>
+              <a href="usato.html" class="btn btn-gold">Vedi Articoli Usati →</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer id="site-footer"></footer>
-  <script src="main.js"></script>
-  <script src="components.js"></script>
-  <script>
-    function sendSellEmail() {
-      const nome     = document.getElementById('sNome').value.trim();
-      const email    = document.getElementById('sEmail').value.trim();
-      const telefono = document.getElementById('sTelefono').value.trim();
-      const cat      = document.getElementById('sCategoria').value;
-      const articolo = document.getElementById('sArticolo').value.trim();
-      const prezzo   = document.getElementById('sPrezzo').value;
-      const cond     = document.getElementById('sCondizioni').value;
-      const desc     = document.getElementById('sDescrizione').value.trim();
-      const foto     = document.getElementById('sFoto').files;
-      const privacy  = document.getElementById('sPrivacy').checked;
+    <!-- ════════════ FAQ ════════════ -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="text-center fade-in" style="max-width:500px;margin:0 auto 3rem;">
+          <span class="section-tag">Domande Frequenti</span>
+          <h2>FAQ</h2>
+          <div class="divider-center"></div>
+        </div>
+        <div style="max-width:700px;margin:0 auto;" class="fade-in fade-in-d1">
+          <div style="border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+            <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
+              <strong>Quanto tempo impiega la valutazione?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
+            </div>
+            <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">La valutazione tecnica viene eseguita entro 24-48 ore lavorative e comprende controlli su struttura, impianto e attrezzature collegate.</div>
 
-      // Validazione
-      if (!nome || nome.length < 2)   return showToast('Inserisci il tuo nome (min. 2 caratteri).', 'error');
-      if (!isValidEmail(email))        return showToast('Inserisci un\'email valida.', 'error');
-      if (!cat)                        return showToast('Seleziona una categoria.', 'error');
-      if (!articolo || articolo.length < 3) return showToast('Inserisci il nome dell\'articolo.', 'error');
-      if (!prezzo || !isValidPrice(prezzo)) return showToast('Inserisci un prezzo valido.', 'error');
-      if (!desc || desc.length < 20)   return showToast('Descrivi l\'articolo (min. 20 caratteri).', 'error');
-      if (foto.length === 0)           return showToast('Seleziona almeno una foto.', 'error');
-      for (let f of foto) {
-        if (f.size > 10 * 1024 * 1024) return showToast(`La foto ${f.name} supera i 10MB. Riduci la dimensione.`, 'error');
-      }
-      if (!privacy)                    return showToast('Devi accettare la Privacy Policy.', 'error');
+            <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
+              <strong>Quanto prendo per la vendita?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
+            </div>
+            <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">L’offerta è basata sulla condizione tecnica, sulla funzionalità dell’impianto e sul valore di mercato dei mezzi usati simili.</div>
 
-      // Salva localmente per l'admin (dati inviati da questo browser)
-      const req = {
-        id: 'REQ-' + Date.now(),
-        nome: nome.substring(0,80),
-        email: email.substring(0,120),
-        telefono: telefono.substring(0,20),
-        categoria: cat,
-        articolo: articolo.substring(0,120),
-        prezzo: parseFloat(prezzo),
-        condizioni: cond,
-        descrizione: desc.substring(0,1500),
-        foto: Array.from(foto).map(f => ({name: f.name, size: f.size})),
-        date: new Date().toISOString()
-      };
-      const reqs = getData('usedEmailRequests');
-      reqs.unshift(req);
-      setData('usedEmailRequests', reqs);
+            <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
+              <strong>Che tipi di articoli accettate?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
+            </div>
+            <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">Accettiamo camion usati, gru, impianti scarrabili e sistemi di compattazione. Valutiamo anche modifiche e allestimenti speciali.</div>
 
-      // Costruisci corpo email
-      const subject = encodeURIComponent(`Richiesta Vendita Usato: ${articolo}`);
-      const fotoList = Array.from(foto).map(f => f.name).join(', ');
-      const body = encodeURIComponent(
+            <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);">
+              <strong>Come ricevo il pagamento?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
+            </div>
+            <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);border-bottom:1px solid var(--border);">Il pagamento è concordato in fase di offerta e può essere effettuato secondo le modalità definite insieme, anche con anticipo al ritiro.</div>
+
+            <div onclick="toggleFaq(this)" style="padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+              <strong>Devo portare fisicamente l'articolo?</strong><span style="color:var(--gold);font-size:1.2rem;">+</span>
+            </div>
+            <div style="display:none;padding:1rem 1.5rem;font-size:.88rem;color:var(--text-muted);">Possiamo organizzare il ritiro o la logistica del mezzo insieme ai nostri partner, così da velocizzare la transazione.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="site-footer"></footer>
+
+    <script src="main.js"></script>
+    <script src="components.js"></script>
+    <script>
+      function sendSellEmail() {
+        const nome     = document.getElementById('sNome').value.trim();
+        const email    = document.getElementById('sEmail').value.trim();
+        const telefono = document.getElementById('sTelefono').value.trim();
+        const cat      = document.getElementById('sCategoria').value;
+        const articolo = document.getElementById('sArticolo').value.trim();
+        const prezzo   = document.getElementById('sPrezzo').value;
+        const cond     = document.getElementById('sCondizioni').value;
+        const desc     = document.getElementById('sDescrizione').value.trim();
+        const foto     = document.getElementById('sFoto').files;
+        const privacy  = document.getElementById('sPrivacy').checked;
+
+        // Validazione
+        if (!nome || nome.length < 2)   return showToast('Inserisci il tuo nome (min. 2 caratteri).', 'error');
+        if (!isValidEmail(email))        return showToast('Inserisci un\'email valida.', 'error');
+        if (!cat)                        return showToast('Seleziona una categoria.', 'error');
+        if (!articolo || articolo.length < 3) return showToast('Inserisci il nome dell\'articolo.', 'error');
+        if (!prezzo || !isValidPrice(prezzo)) return showToast('Inserisci un prezzo valido.', 'error');
+        if (!desc || desc.length < 20)   return showToast('Descrivi l\'articolo (min. 20 caratteri).', 'error');
+        if (foto.length === 0)           return showToast('Seleziona almeno una foto.', 'error');
+        for (let f of foto) {
+          if (f.size > 10 * 1024 * 1024) return showToast(`La foto ${f.name} supera i 10MB. Riduci la dimensione.`, 'error');
+        }
+        if (!privacy)                    return showToast('Devi accettare la Privacy Policy.', 'error');
+
+        // Salva localmente per l'admin (dati inviati da questo browser)
+        const req = {
+          id: 'REQ-' + Date.now(),
+          nome: nome.substring(0,80),
+          email: email.substring(0,120),
+          telefono: telefono.substring(0,20),
+          categoria: cat,
+          articolo: articolo.substring(0,120),
+          prezzo: parseFloat(prezzo),
+          condizioni: cond,
+          descrizione: desc.substring(0,1500),
+          foto: Array.from(foto).map(f => ({name: f.name, size: f.size})),
+          date: new Date().toISOString()
+        };
+        const reqs = getData('usedEmailRequests');
+        reqs.unshift(req);
+        setData('usedEmailRequests', reqs);
+
+        // Costruisci corpo email
+        const subject = encodeURIComponent(`Richiesta Vendita Usato: ${articolo}`);
+        const fotoList = Array.from(foto).map(f => f.name).join(', ');
+        const body = encodeURIComponent(
 `Buongiorno,
 
 Vorrei vendere il seguente articolo tramite il vostro sito:
@@ -338,66 +343,75 @@ Telefono:     ${telefono || 'Non fornito'}
 Cordiali saluti,
 ${nome}`);
 
-      // SOSTITUISCI con la tua email reale
-      const adminEmail = 'info@gruscar.it';
-      const mailtoLink = `mailto:${adminEmail}?subject=${subject}&body=${body}`;
+        // SOSTITUISCI con la tua email reale
+        const adminEmail = 'info@gruscar.it';
+        const mailtoLink = `mailto:${adminEmail}?subject=${subject}&body=${body}`;
 
-      // Apri client email
-      window.location.href = mailtoLink;
+        // Apri client email
+        window.location.href = mailtoLink;
 
-      // Mostra successo dopo un breve delay
-      setTimeout(() => {
-        document.getElementById('sellFormContent').classList.add('hidden');
-        document.getElementById('sellSuccess').classList.remove('hidden');
-      }, 800);
-    }
+        // Mostra successo dopo un breve delay
+        setTimeout(() => {
+          document.getElementById('sellFormContent').classList.add('hidden');
+          document.getElementById('sellSuccess').classList.remove('hidden');
+        }, 800);
+      }
 
-    function resetSellForm() {
-      ['sNome','sEmail','sTelefono','sArticolo','sPrezzo','sDescrizione'].forEach(id => {
-        const el = document.getElementById(id); if(el) el.value = '';
-      });
-      document.getElementById('sCategoria').value = '';
-      document.getElementById('sFoto').value = '';
-      document.getElementById('fotoPreview').innerHTML = '';
-      document.getElementById('sPrivacy').checked = false;
-      document.getElementById('sellFormContent').classList.remove('hidden');
-      document.getElementById('sellSuccess').classList.add('hidden');
-    }
+      function resetSellForm() {
+        ['sNome','sEmail','sTelefono','sArticolo','sPrezzo','sDescrizione'].forEach(id => {
+          const el = document.getElementById(id); if(el) el.value = '';
+        });
+        document.getElementById('sCategoria').value = '';
+        document.getElementById('sFoto').value = '';
+        document.getElementById('fotoPreview').innerHTML = '';
+        document.getElementById('sPrivacy').checked = false;
+        document.getElementById('sellFormContent').classList.remove('hidden');
+        document.getElementById('sellSuccess').classList.add('hidden');
+      }
 
-    function toggleFaq(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('span');
-      const isOpen = content.style.display === 'block';
-      content.style.display = isOpen ? 'none' : 'block';
-      icon.textContent = isOpen ? '+' : '−';
-    }
+      function toggleFaq(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('span');
+        const isOpen = content.style.display === 'block';
+        content.style.display = isOpen ? 'none' : 'block';
+        icon.textContent = isOpen ? '+' : '−';
+      }
 
-    // Preview selected photos
-    document.getElementById('sFoto')
-      .addEventListener('change',
-      function(e) {
-        mostraAnteprima(e.target.files);
-      });
+      // Preview selected photos
+      document.getElementById('sFoto')
+        .addEventListener('change',
+        function(e) {
+          mostraAnteprima(e.target.files);
+        });
 
-    function mostraAnteprima(files) {
-      const div = document.getElementById
-        ('fotoPreview');
-      div.innerHTML = '';
-      [...files].forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const img = document.createElement
-            ('img');
-          img.src = e.target.result;
-          img.style.cssText =
-            'width:80px;height:80px;' +
-            'object-fit:cover;' +
-            'border-radius:6px;margin:4px';
-          div.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  </script>
+      function mostraAnteprima(files) {
+        const div = document.getElementById
+          ('fotoPreview');
+        div.innerHTML = '';
+        [...files].forEach(file => {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const img = document.createElement
+              ('img');
+            img.src = e.target.result;
+            img.style.cssText =
+              'width:80px;height:80px;' +
+              'object-fit:cover;' +
+              'border-radius:6px;margin:4px';
+            div.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    </script>
+  </template>
+
+  <main style="min-height:calc(100vh - var(--nav-h));display:grid;place-items:center;padding:4rem 1.5rem;">
+    <p style="margin:0;font-family:'Outfit',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--text);text-align:center;">a breve...</p>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="main.js"></script>
+  <script src="components.js"></script>
 </body>
 </html>
