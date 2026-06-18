@@ -142,17 +142,31 @@ function adminLogout() {
 /* ═══ DEFAULT DATA ══════════════════════════════════════ */
 function getProducts() {
   const s = getData('products');
-  if (s.length) return s;
   const d = [
-    { id:'p1', name:'Gru Semovente 25t', cat:'cat1', price:299, oldPrice:399, desc:'Gru usata revisionata con controllo strutturale, pronta per lavori industriali e cantieristici.' },
-    { id:'p2', name:'Impianto Scarrabile Completo', cat:'cat2', price:149, oldPrice:0,   desc:'Sistema scarrabile con cassone e gancio rapido, ideale per trasporto e logistica specializzata.' },
-    { id:'p3', name:'Sistema di Compattazione', cat:'cat3', price:89,  oldPrice:0,   desc:'Compattatore industriale per raccolta e gestione rifiuti, con impianto testato e certificato.' },
-    { id:'p4', name:'Camion Allestito Scarrabile', cat:'novita', price:459, oldPrice:599, desc:'Camion usato con allestimento scarrabile e impianto pronto per consegna e installazione.' },
+    { id:'p1', name:'Scania G660', cat:'cat1', price:299, oldPrice:399, desc:'SCANIA G660 3 assi allestito con impianto scarrabile MULTILIFT ULTIMA 26Z e cassa con gru PALFINGER EPSILON Q150L allegata con un polipo Minelli da 250 litri. L’allestimento prevede impianto di ingrassaggio automatico dedicato per gru e scarrabile, cassette porta utensili in acciaio inox fiorettato e sedile con copertura antipioggia.' },
+    { id:'p2', name:'DAF XF', cat:'cat2', price:149, oldPrice:0,   desc:'DAF XF 3 assi allestito con scarrabile MEC SCK267NL equipaggiato con braccetto e pinze per lavori in ADR. Include tanica per l’acqua, cassetta porta guanti, due cassette porta utensili in acciaio inox fiorettato, impianto di ingrassaggio automatico, radiocomando e fanaleria di lavoro aggiuntiva per operare anche di notte.' },
+    { id:'p3', name:'DAF XB', cat:'cat3', price:89,  oldPrice:0,   desc:'DAF XB con cerchi bruniti allestito con ribaltabile e gru caricatore MARCHESI M8R 11.67 con polipo Minelli da 250 litri. Mezzo ideale per materiali leggeri e per lavorare in spazi più ristretti, accessoriato con impianto di geolocalizzazione e controllo a distanza secondo gli standard Industria 4.0.' },
+    { id:'p4', name:'Caricatore semovente', cat:'novita', price:459, oldPrice:599, desc:'Caricatore SOLMEC equipaggiato con polipo da rottame ROZZI, adatto a lavori pesanti anche in ambienti difficili grazie alla cabina a sopraelevazione idraulica.' },
     { id:'p5', name:'Gru Caricatrice Usata', cat:'cat1', price:199, oldPrice:0,   desc:'Attrezzatura per sollevamento e movimentazione, controllata e disponibile per utilizzo immediato.' },
     { id:'p6', name:'Ribaltabile Usato',  cat:'cat2', price:75,  oldPrice:0,   desc:'Cassone ribaltabile in buone condizioni, ideale per cantiere e trasporto materiale sfuso.' },
     { id:'p7', name:'Telaio Scarrabile Certificato',   cat:'novita', price:329, oldPrice:399, desc:'Telaio scarrabile con gancio rapido, progettato per installazione su camion industriali.' },
     { id:'p8', name:'Camion Compattatore',    cat:'cat3', price:119, oldPrice:0,   desc:'Veicolo attrezzato per raccolta e compattazione, disponibile con supporto tecnico dedicato.' },
   ];
+  if (s.length) {
+    const protectedDefaults = new Set(['p1', 'p2', 'p3', 'p4']);
+    const storedById = new Map(s.map(p => [p.id, p]));
+    const merged = d.map(p => {
+      const stored = storedById.get(p.id);
+      if (!stored) return p;
+      if (!protectedDefaults.has(p.id)) return stored;
+      return {
+        ...p,
+        ...(stored.foto ? { foto: stored.foto } : {})
+      };
+    });
+    const extras = s.filter(p => !storedById.has(p.id) || !d.some(dp => dp.id === p.id));
+    return [...merged, ...extras];
+  }
   setData('products', d); return d;
 }
 
