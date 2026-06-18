@@ -96,6 +96,26 @@
       display: flex;
       flex-direction: column;
     }
+    .product-card-type {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: .75rem;
+      padding: .24rem .65rem;
+      border-radius: 999px;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,.05);
+      color: var(--text-muted, #6b6459);
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .product-card-type.service {
+      background: var(--gold-bg, rgba(31,108,184,0.08));
+      color: var(--gold, #1f6cb8);
+      border-color: var(--gold-border, rgba(31,108,184,0.22));
+    }
     .product-card-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.2rem;
@@ -541,7 +561,7 @@
   <section class="section">
     <div class="container">
       <div class="text-center fade-in" style="max-width:560px;margin:0 auto 1rem;">
-        <h2>Alcune Tipologie di Mezzi</h2>
+        <h2>Mezzi, Attrezzature e Servizi</h2>
         <div class="divider-center"></div>
       </div>
 
@@ -639,6 +659,7 @@
     const PRODUCTS_DATA = [
       {
         id: 1,
+        type: "Mezzo",
         title: "Scania G660",
         shortDesc: "SCANIA G660 3 assi allestito con impianto scarrabile MULTILIFT ULTIMA 26Z e cassa con gru PALFINGER EPSILON Q150L allegata con un polipo minelli da 250 litri.",
         fullDesc: `
@@ -661,6 +682,7 @@
       },
       {
         id: 2,
+        type: "Mezzo",
         title: "DAF XF",
         shortDesc: "DAF XF 3 assi allestito con scarrabile MEC SCK267NL equipaggiato con braccetto e pinze per lavori in ADR.",
         fullDesc: `
@@ -683,6 +705,7 @@
       },
       {
         id: 3,
+        type: "Mezzo",
         title: "DAF XB",
         shortDesc: "DAF XB con cerchi bruniti allestito con ribaltabile e gru caricatore MARCHESI M8R 11.67 e polipo minelli da 250 litri.",
         fullDesc: `
@@ -702,6 +725,75 @@
         ],
         images: ["prodotto3.png"],
         mailSubject: "Richiesta%20informazioni%20DAF%20XB"
+      },
+      {
+        id: 4,
+        type: "Attrezzatura",
+        title: "Sistema di Compattazione Scarrabile",
+        shortDesc: "Attrezzatura scarrabile dedicata alla compattazione e alla gestione dei materiali in contesti industriali e operativi.",
+        fullDesc: `
+          <p>Sistema di compattazione scarrabile pensato per la gestione operativa dei materiali e per l'ottimizzazione dei volumi. La configurazione mostrata rappresenta una soluzione adatta a contesti industriali in cui sono richieste robustezza, praticita di utilizzo e continuita di lavoro.</p>
+        `,
+        specs: [
+          { label: "Categoria", val: "Attrezzatura" },
+          { label: "Tipologia", val: "Sistema di compattazione" },
+          { label: "Configurazione", val: "Scarrabile" },
+          { label: "Impiego", val: "Gestione materiali" }
+        ],
+        highlights: [
+          "Struttura dedicata alla compattazione",
+          "Configurazione scarrabile per movimentazione operativa",
+          "Soluzione adatta a impieghi industriali",
+          "Impostazione pensata per ottimizzare i volumi"
+        ],
+        images: ["prodotto5.png"],
+        mailSubject: "Richiesta%20informazioni%20Sistema%20di%20Compattazione%20Scarrabile"
+      },
+      {
+        id: 5,
+        type: "Allestimento",
+        title: "Allestimento con Gru Marchesi",
+        shortDesc: "Allestimento dedicato alla movimentazione dei materiali con gru Marchesi integrata e struttura professionale di supporto.",
+        fullDesc: `
+          <p>Allestimento con gru Marchesi integrata, pensato per le operazioni di carico, movimentazione e gestione dei materiali. La configurazione mostrata mette in evidenza una struttura professionale adatta a lavorazioni operative dove sono richieste funzionalita, stabilita e versatilita d'impiego.</p>
+        `,
+        specs: [
+          { label: "Categoria", val: "Allestimento" },
+          { label: "Gru", val: "Marchesi" },
+          { label: "Impiego", val: "Carico e movimentazione" },
+          { label: "Configurazione", val: "Struttura dedicata" }
+        ],
+        highlights: [
+          "Gru idraulica integrata",
+          "Struttura rinforzata per utilizzo operativo",
+          "Configurazione adatta alla movimentazione dei materiali",
+          "Soluzione pensata per attivita professionali"
+        ],
+        images: ["prodotto6.png"],
+        mailSubject: "Richiesta%20informazioni%20Allestimento%20con%20Gru%20Marchesi"
+      },
+      {
+        id: 6,
+        type: "Servizio",
+        title: "Servizio di Riparazione Scarrabile",
+        shortDesc: "Intervento di riparazione e ripristino eseguito in officina su un allestimento scarrabile, con lavorazione dedicata alle parti strutturali.",
+        fullDesc: `
+          <p>Questa immagine mostra un intervento di riparazione e ripristino eseguito in officina su un allestimento scarrabile. Il servizio comprende la valutazione tecnica dello stato del mezzo, il controllo delle parti interessate e le lavorazioni necessarie per riportare la struttura a una condizione corretta e funzionale.</p>
+        `,
+        specs: [
+          { label: "Categoria", val: "Servizio" },
+          { label: "Intervento", val: "Riparazione e ripristino" },
+          { label: "Ambito", val: "Allestimenti scarrabili" },
+          { label: "Esecuzione", val: "In officina" }
+        ],
+        highlights: [
+          "Valutazione tecnica preliminare",
+          "Ripristino delle parti strutturali interessate",
+          "Intervento eseguito in officina specializzata",
+          "Servizio dedicato a mezzi e allestimenti professionali"
+        ],
+        images: ["prodotto7.png", "prodotto7_1.1.png", "prodotto7_1.2.png", "prodotto7_1.3.png"],
+        mailSubject: "Richiesta%20informazioni%20Servizio%20di%20Riparazione%20Scarrabile"
       }
     ];
 
@@ -720,6 +812,7 @@
               ${imgCount > 1 ? `<div class="product-img-count">${imgCount} foto</div>` : ""}
             </div>
             <div class="product-card-body">
+              <div class="product-card-type ${p.type === 'Servizio' ? "service" : ""}">${p.type}</div>
               <div class="product-card-title">${p.title}</div>
               <p class="product-card-desc-short">${p.shortDesc}</p>
               <div class="product-specs-mini">
@@ -743,6 +836,7 @@
       if (!p) return;
       currentProduct = p;
       currentImgIndex = 0;
+      const isService = p.type === 'Servizio';
 
       document.getElementById('modal-title').textContent = p.title;
       document.getElementById('modal-desc').innerHTML = p.fullDesc;
@@ -753,9 +847,14 @@
 
       // CTA
       document.getElementById('modal-cta').innerHTML = `
-        <a href="mailto:info@gruscar.it?subject=${p.mailSubject}" class="btn-modal-primary">Richiedi informazioni →</a>
+        <a href="mailto:info@gruscar.it?subject=${p.mailSubject}" class="btn-modal-primary">${isService ? "Richiedi informazioni sul servizio" : "Richiedi informazioni"} →</a>
         <a href="contatti.html" class="btn-modal-secondary">Modulo di contatto</a>
       `;
+
+      document.querySelector('.modal-sidebar-title').textContent = isService ? 'Vuoi informazioni sul servizio?' : 'Vuoi maggiori informazioni?';
+      document.querySelector('.modal-sidebar p').textContent = isService
+        ? 'Contattaci per ricevere maggiori dettagli su questo intervento di riparazione o su servizi simili.'
+        : 'Contattaci per ricevere maggiori dettagli su questo allestimento o su soluzioni simili.';
 
       buildGallery(p.images);
 
