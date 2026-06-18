@@ -10,7 +10,7 @@ function injectNavbar() {
     <div class="container">
       <div class="nav-inner">
         <a href="index.html" class="nav-logo">
-          <img src="logo.png" alt="GRU SCAR SRL" style="height:48px;width:auto;display:block;object-fit:contain;">
+          <img src="logo.png" alt="GRU SCAR SRL" style="height:56px;width:auto;display:block;object-fit:contain;">
         </a>
         <nav class="nav-links">
           <a href="index.html">Home</a>
@@ -192,7 +192,7 @@ function injectAdminUI() {
       <div class="admin-topbar">
         <div style="display:flex;align-items:center;gap:.75rem;">
           <a href="index.html">
-            <img src="logo.png" alt="GRU SCAR SRL" style="height:40px;width:auto;display:block;object-fit:contain;">
+            <img src="logo.png" alt="GRU SCAR SRL" style="height:48px;width:auto;display:block;object-fit:contain;">
           </a>
         </div>
         <div style="display:flex;align-items:center;gap:1rem;">
