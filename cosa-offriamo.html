@@ -3,37 +3,450 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servizi — GRU SCAR SRL</title>
+  <title>Chi Siamo — GRU SCAR SRL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body.about-page {
+      background: transparent;
+      position: relative;
+    }
+    .about-page-bg {
+      position: fixed;
+      top: var(--nav-h);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url('sfondo2.png') center center/cover no-repeat;
+      z-index: 0;
+    }
+    .about-page-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 37, 64, 0.5);
+    }
+    .about-page > .page-header,
+    .about-page > .about-hero-pin,
+    .about-page > .section,
+    .about-page > footer {
+      position: relative;
+      z-index: 1;
+    }
+    .about-page .page-header {
+      background: rgba(237, 244, 251, 0.76);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: rgba(199, 211, 232, 0.55);
+    }
+    .about-hero-pin {
+      height: 180vh;
+      position: relative;
+      background: transparent;
+    }
+    .about-hero-sticky {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      overflow: hidden;
+    }
+    .about-hero-visual {
+      position: relative;
+      height: 100%;
+      background: transparent;
+    }
+    .about-hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 37, 64, 0.08), rgba(16, 37, 64, 0.72));
+    }
+    .about-hero-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 4rem;
+      color: #fff;
+    }
+    .about-hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.76);
+      margin-bottom: 1rem;
+    }
+    .about-hero-content h2 {
+      color: #fff;
+      max-width: 720px;
+      margin-bottom: 1rem;
+    }
+    .about-hero-content p {
+      max-width: 620px;
+      color: rgba(255,255,255,0.84);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+    .about-intro-copy {
+      max-width: 780px;
+    }
+    .about-page .section-alt,
+    .about-page .stat-box,
+    .about-page .offer-card,
+    .about-page .about-feat,
+    .about-page .about-values-intro {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .about-values-intro {
+      padding: 2rem 2.25rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.38);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 16px 40px rgba(16, 37, 64, 0.12);
+    }
+    .about-page .section-alt {
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .about-page .about-feat {
+      padding: 1.2rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.38);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 1024px) {
+      .about-hero-pin {
+        height: 150vh;
+      }
+    }
+    @media (max-width: 768px) {
+      .about-hero-pin {
+        height: auto;
+      }
+      .about-hero-sticky {
+        position: relative;
+        top: auto;
+        height: 68vh;
+        min-height: 420px;
+      }
+      .about-hero-content {
+        padding-bottom: 2.5rem;
+      }
+      .about-page-bg {
+        top: 0;
+      }
+    }
+    @media (max-width: 640px) {
+      .about-hero-sticky {
+        height: 56vh;
+        min-height: 340px;
+      }
+      .about-hero-content p {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="about-page">
   <header id="navbar"></header>
+  <div class="about-page-bg" aria-hidden="true"></div>
 
+  <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="container page-header-inner">
-      <span class="section-tag">I Nostri Servizi</span>
-      <h1>Cosa Offriamo</h1>
+      <span class="section-tag">La Nostra Storia</span>
+      <h1>Chi Siamo</h1>
       <div class="breadcrumb">
-        <a href="index.html">Home</a><span>›</span><span>Servizi</span>
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>Chi Siamo</span>
       </div>
     </div>
   </div>
 
+  <!-- ════════════ HERO STICKY ════════════ -->
+  <section class="about-hero-pin">
+    <div class="about-hero-sticky">
+      <div class="about-hero-visual">
+        <div class="container about-hero-content fade-in">
+          <div class="about-hero-eyebrow">Chi Siamo</div>
+          <h2>Da oltre 30 anni al fianco di chi lavora con gru e mezzi speciali.</h2>
+          <p>Esperienza tecnica, officina e allestimenti su misura per accompagnare ogni progetto con competenza, continuità e attenzione al lavoro sul campo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════════════ INTRO ════════════ -->
   <section class="section section-alt">
     <div class="container">
-      <div class="grid-2 fade-in" style="align-items:center;gap:5rem;">
-        <div>
-          <span class="section-tag">Panoramica</span>
-          <h2>Soluzioni per Gru,<br>Impanti Scarrabili e Compattazione</h2>
+      <div class="fade-in about-intro-copy">
+          <span class="section-tag">La Nostra Missione</span>
+          <h2>Esperienza e innovazione <br>nel mondo delle <em style="color:var(--gold);">gru.</em></h2>
           <div class="divider"></div>
-          <p class="lead">Offriamo progettazione, riparazione e allestimento per gru, impianti scarrabili e sistemi di compattazione. Vendita nuovo, usato e acquisto usato con assistenza completa.</p>
-          <p style="color:var(--text-muted);margin-top:1rem;line-height:1.8;">Siamo il partner tecnico per chi richiede modifiche su camion, sistemi scarrabili e impianti speciali, con ogni progetto gestito in modo rapido e affidabile.</p>
-          <a href="contatti.html" class="btn btn-gold mt-2">Richiedi Informazioni →</a>
+          <p class="lead">Da anni operiamo nel settore della riparazione, dell’allestimento e della modifica di gru, impianti scarrabili e sistemi di compattazione, offrendo soluzioni affidabili e su misura per ogni esigenza.</p>
+          <p style="color:var(--text-muted);margin-top:1rem;line-height:1.8;">Siamo specializzati nella riparazione e vendita di camion nuovi e usati, oltre all’acquisto di mezzi usati, garantendo qualità, professionalità e assistenza completa in ogni fase del servizio.</p>
+          <p style="color:var(--text-muted);margin-top:1rem;line-height:1.8;">Siamo una azienda a conduzione familiare con un’esperienza di oltre 30 anni nel nostro settore che ci ha portato ad una graduale crescita fino al giorno d’oggi. Tutt’oggi continuiamo ad evolverci stando al passo coi tempi mantenendo un’alta qualità nel lavoro che facciamo.</p>
+          <div class="mt-2" style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="cosa-offriamo.html" class="btn btn-gold">I Nostri Servizi →</a>
+            <a href="contatti.html" class="btn btn-outline">Contattaci</a>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ VALORI ════════════ -->
+  <section class="section">
+
+  <div class="container">
+
+    <div class="text-center fade-in about-values-intro" style="max-width:560px;margin:0 auto 4rem;">
+
+      <span class="section-tag">I Nostri Valori</span>
+
+      <h2>Cosa Ci Guida</h2>
+
+      <div class="divider-center"></div>
+
+      <p style="color:var(--text-muted);">
+
+        Professionalità, esperienza e attenzione al cliente sono i valori che guidano ogni nostro intervento e ogni progetto realizzato.
+
+      </p>
+
+    </div>
+
+    <div class="grid-3 fade-in fade-in-d1">
+
+      <div class="offer-card">
+
+        <div class="offer-icon-box">
+
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+
         </div>
-        <!-- IMMAGINE SERVIZI -->
+
+        <div class="offer-title">Professionalità</div>
+
+        <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">
+
+          Operiamo con competenza e precisione in ogni lavorazione, garantendo interventi affidabili e realizzati secondo elevati standard qualitativi.
+
+        </p>
+
+      </div>
+
+      <div class="offer-card">
+
+        <div class="offer-icon-box">
+
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+
+        </div>
+
+        <div class="offer-title">Affidabilità</div>
+
+        <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">
+
+          Rispettiamo tempi e impegni offrendo un supporto costante ai nostri clienti, dalla consulenza iniziale fino all’assistenza post-vendita.
+
+        </p>
+
+      </div>
+
+      <div class="offer-card">
+
+        <div class="offer-icon-box">
+
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+        </div>
+
+        <div class="offer-title">Passione per il Lavoro</div>
+
+        <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;">
+
+          Ogni progetto viene seguito con attenzione e dedizione, mettendo sempre al centro le esigenze reali del cliente.
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ABOUT FEATURES LIST -->
+
+    <div class="grid-2 mt-3 fade-in fade-in-d2" style="align-items:start;">
+
+      <div>
+
+        <div class="about-feat">
+
+          <div class="about-feat-icon">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+
+          </div>
+
+          <div>
+            <h4 style="margin-bottom:.3rem;">Oltre 30 Anni di Esperienza</h4>
+
+            <p style="font-size:.88rem;color:var(--text-muted);">
+
+              Una lunga esperienza nel settore ci permette di offrire competenza tecnica e soluzioni efficaci per ogni esigenza.
+
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="about-feat">
+
+          <div class="about-feat-icon">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+
+          </div>
+
+          <div>
+
+            <h4 style="margin-bottom:.3rem;">Lavorazioni di Qualità</h4>
+
+            <p style="font-size:.88rem;color:var(--text-muted);">
+
+              Utilizziamo componenti affidabili e tecniche moderne per garantire sicurezza e durata nel tempo.
+
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="about-feat">
+
+          <div class="about-feat-icon">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+
+          </div>
+
+          <div>
+
+            <h4 style="margin-bottom:.3rem;">Consulenza Trasparente</h4>
+
+            <p style="font-size:.88rem;color:var(--text-muted);">
+
+              Seguiamo il cliente con chiarezza e disponibilità, consigliando sempre la soluzione più adatta.
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <div class="about-feat">
+
+          <div class="about-feat-icon">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg>
+
+          </div>
+
+          <div>
+
+            <h4 style="margin-bottom:.3rem;">Interventi Rapidi</h4>
+
+            <p style="font-size:.88rem;color:var(--text-muted);">
+
+              Garantiamo tempi rapidi di lavorazione per ridurre al minimo i fermi operativi dei mezzi.
+
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="about-feat">
+
+          <div class="about-feat-icon">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13"/></svg>
+
+          </div>
+
+          <div>
+
+            <h4 style="margin-bottom:.3rem;">Assistenza Completa</h4>
+
+            <p style="font-size:.88rem;color:var(--text-muted);">
+
+              Offriamo supporto continuo per riparazioni, manutenzioni, modifiche e allestimenti personalizzati.
+
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="about-feat">
+
+          <div class="about-feat-icon">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+
+          </div>
+
+          <div>
+
+            <h4 style="margin-bottom:.3rem;">Servizio su Misura</h4>
+
+            <p style="font-size:.88rem;color:var(--text-muted);">
+
+              Realizziamo soluzioni personalizzate per ogni tipo di camion, gru o impianto speciale.
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <!-- ════════════ STATISTICHE ════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="grid-4 fade-in">
+        <div class="stat-box"><div class="stat-num">30+</div><div class="stat-lbl">Anni di Attività</div></div>
+        <div class="stat-box"><div class="stat-num">150+</div><div class="stat-lbl">Clienti Serviti nel 2025</div></div>
+        <div class="stat-box"><div class="stat-num">200+</div><div class="stat-lbl">Prodotti</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Soddisfazione</div></div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer id="site-footer"></footer>
+  <script src="main.js"></script>
+  <script src="components.js"></script>
+</body>
+</html>
         <div class="img-ph fade-in" style="height:400px;border-radius:var(--radius-lg);">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
           <span>Immagine Servizi</span>
