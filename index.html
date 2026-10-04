@@ -4,7 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GRU SCAR SRL — Home</title>
-  <meta name="description" content="GRU SCAR SRL — Riparazione, allestimento e vendita di gru, sistemi scarrabili e camion. Soluzioni per uso professionale.">
+  <meta name="description" content="GRU SCAR SRL offre vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati, con consulenza tecnica e mercato usato selezionato.">
+  <link rel="canonical" href="https://www.gruscar.it/">
+  <link rel="icon" type="image/png" href="log.png">
+  <link rel="apple-touch-icon" href="log.png">
+  <meta property="og:site_name" content="GRU SCAR SRL">
+  <meta property="og:title" content="GRU SCAR SRL — Gru, Scarrabili e Camion">
+  <meta property="og:description" content="Vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.gruscar.it/">
+  <meta property="og:image" content="https://www.gruscar.it/log.png">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "GRU SCAR SRL",
+    "url": "https://www.gruscar.it/",
+    "logo": "https://www.gruscar.it/log.png",
+    "description": "GRU SCAR SRL offre vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati, con consulenza tecnica e mercato usato selezionato.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+39 059 928294",
+      "contactType": "customer service",
+      "areaServed": "IT",
+      "availableLanguage": "Italian"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      { "@type": "SiteNavigationElement", "position": 1, "name": "Home", "url": "https://www.gruscar.it/" },
+      { "@type": "SiteNavigationElement", "position": 2, "name": "Chi Siamo", "url": "https://www.gruscar.it/chi-siamo.html" },
+      { "@type": "SiteNavigationElement", "position": 3, "name": "Servizi", "url": "https://www.gruscar.it/cosa-offriamo.html" },
+      { "@type": "SiteNavigationElement", "position": 4, "name": "Prodotti", "url": "https://www.gruscar.it/prodotti.html" },
+      { "@type": "SiteNavigationElement", "position": 5, "name": "Usato", "url": "https://www.gruscar.it/usato.html" },
+      { "@type": "SiteNavigationElement", "position": 6, "name": "Contatti", "url": "https://www.gruscar.it/contatti.html" }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -189,14 +230,11 @@
   <section class="hero">
     <div class="container" style="position:relative;z-index:1;width:100%;">
       <div class="hero-left fade-in">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          Qualità &amp; Professionalità
-        </div>
+      
         <h1 class="hero-title">
           Riparazione, Allestimento<br>
           <em>e Modifica</em><br>
-          di Gru e Camion
+          di Gru e Impianti Scarrabili e Compattazioni
         </h1>
         <p class="hero-desc">
           Soluzioni tecniche per gru, impianti scarrabili, sistemi di compattazione e veicoli industriali. Nuovo, usato e assistenza con controllo tecnico professionale.
@@ -342,21 +380,15 @@
   <script src="main.js"></script>
   <script src="components.js"></script>
   <script>
-    // Prodotti anteprima (3 prodotti)
-    function renderHomeProducts() {
+    // Prodotti anteprima (ultimi 3 prodotti pubblicati dall'admin)
+    async function renderHomeProducts() {
       const grid = document.getElementById('homeProducts');
-      const featuredIds = ['p1', 'p2', 'p3'];
-      const prods = getProducts().filter(p => featuredIds.includes(p.id));
-      const productImages = [
-        'prodotto1.jpg',
-        'prodotto2.png',
-        'prodotto3.png'
-      ];
+      const prods = await Promise.all(getProducts().filter(product => product.featured).slice(0, 3).map(hydrateAdminPhotos));
       grid.innerHTML = prods.map(p => `
         <div class="product-card">
           <div class="product-img">
             <div class="img-ph" style="height:190px;border-radius:0;border:none;border-bottom:1.5px solid var(--border);padding:0;overflow:hidden;">
-              <img src="${sanitize(p.foto || productImages[prods.indexOf(p)] || productImages[0])}" alt="${sanitize(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block;">
+              ${p.foto ? `<img src="${sanitize(p.foto)}" alt="${sanitize(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block;">` : '<span>Foto non disponibile</span>'}
             </div>
           </div>
           <div class="product-body">
@@ -368,16 +400,15 @@
         </div>`).join('');
     }
 
-    // Usato anteprima (4 articoli)
-    function renderHomeUsed() {
+    // Usato anteprima (ultimi 4 articoli pubblicati)
+    async function renderHomeUsed() {
       const grid = document.getElementById('homeUsed');
-      const items = getUsedItems().filter(i=>i.approved).slice(0,4);
+      const items = await Promise.all(getUsedItems().filter(i=>i.approved).slice(0,4).map(hydrateAdminPhotos));
       grid.innerHTML = items.map(i => `
         <div class="product-card">
           <div class="product-img">
             <div class="img-ph" style="height:190px;border-radius:0;border:none;border-bottom:1.5px solid var(--border);">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-              <span>Foto Articolo</span>
+              ${i.foto ? `<img src="${sanitize(i.foto)}" alt="${sanitize(i.name)}" style="width:100%;height:100%;object-fit:cover;display:block;">` : '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Foto Articolo</span>'}
             </div>
           </div>
           <div class="product-body">
