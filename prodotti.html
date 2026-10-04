@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prodotti — GRU SCAR SRL</title>
+  <meta name="description" content="GRU SCAR SRL offre vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati, con consulenza tecnica e mercato usato selezionato.">
+  <link rel="canonical" href="https://www.gruscar.it/prodotti.html">
+  <link rel="icon" type="image/png" href="log.png">
+  <link rel="apple-touch-icon" href="log.png">
+  <meta property="og:site_name" content="GRU SCAR SRL">
+  <meta property="og:title" content="Prodotti — GRU SCAR SRL">
+  <meta property="og:description" content="Prodotti e soluzioni per gru, scarrabili, compattatori, camion e attrezzature professionali.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.gruscar.it/prodotti.html">
+  <meta property="og:image" content="https://www.gruscar.it/log.png">
+  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -601,7 +612,7 @@
   <!-- ═══ MODAL ═══ -->
   <div class="modal-backdrop" id="modal-backdrop" onclick="handleBackdropClick(event)">
     <div class="modal-box" id="modal-box">
-      <button class="modal-close" onclick="closeModal()" title="Chiudi">✕</button>
+      <button class="modal-close" onclick="closeProductModal()" title="Chiudi">✕</button>
 
       <!-- Gallery -->
       <div class="modal-gallery">
@@ -775,7 +786,7 @@
       {
         id: 6,
         type: "Servizio",
-        title: "Servizio di Riparazione Scarrabile",
+        title: "Servizio di Riparazione compattatore",
         shortDesc: "Intervento di riparazione e ripristino eseguito in officina su un allestimento scarrabile, con lavorazione dedicata alle parti strutturali.",
         fullDesc: `
           <p>Questa immagine mostra un intervento di riparazione e ripristino eseguito in officina su un allestimento scarrabile. Il servizio comprende la valutazione tecnica dello stato del mezzo, il controllo delle parti interessate e le lavorazioni necessarie per riportare la struttura a una condizione corretta e funzionale.</p>
@@ -798,41 +809,81 @@
     ];
 
     /* ─── Render cards ─── */
-    (function renderCards() {
-      const grid = document.getElementById('products-grid');
-      PRODUCTS_DATA.forEach(p => {
-        const imgCount = p.images.length;
-        grid.insertAdjacentHTML('beforeend', `
-          <div class="product-card" onclick="openModal(${p.id})">
+    let displayedProducts = PRODUCTS_DATA;
+
+    function buildProductCard(p) {
+      const imgCount = p.images.length;
+      const cover = p.images[0] || 'sfondo1.png';
+      return `
+          <div class="product-card" onclick="openProductModal('${sanitize(String(p.id))}')">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="${p.images[0]}" alt="${p.title}" loading="lazy">
+              <img class="product-card-img" src="${sanitize(cover)}" alt="${sanitize(p.title)}" loading="lazy">
               <div class="product-card-img-overlay">
                 <span class="product-card-img-overlay-label">Apri scheda</span>
               </div>
               ${imgCount > 1 ? `<div class="product-img-count">${imgCount} foto</div>` : ""}
             </div>
             <div class="product-card-body">
-              <div class="product-card-type ${p.type === 'Servizio' ? "service" : ""}">${p.type}</div>
-              <div class="product-card-title">${p.title}</div>
-              <p class="product-card-desc-short">${p.shortDesc}</p>
+              <div class="product-card-type ${p.type === 'Servizio' ? "service" : ""}">${sanitize(p.type)}</div>
+              <div class="product-card-title">${sanitize(p.title)}</div>
+              <p class="product-card-desc-short">${sanitize(p.shortDesc)}</p>
               <div class="product-specs-mini">
-                ${p.specs.map(s => `<span class="spec-chip">${s.val}</span>`).join("")}
+                ${p.specs.map(s => `<span class="spec-chip">${sanitize(s.val)}</span>`).join("")}
               </div>
               <div class="product-card-cta">
                 <button class="btn-detail">Apri scheda →</button>
               </div>
             </div>
-          </div>
-        `);
-      });
-    })();
+          </div>`;
+    }
+
+    async function renderProducts() {
+      const managedProducts = getProducts();
+      const overridesById = new Map(getStoredProducts().map(product => [product.id, product]));
+      const catalogCards = await Promise.all(PRODUCTS_DATA.map(async product => {
+        const managedProduct = managedProducts.find(item => item.catalogId === product.id);
+        if (!managedProduct) return null;
+        const hydratedProduct = await hydrateAdminPhotos(managedProduct);
+        const override = overridesById.get(managedProduct.id);
+        return {
+          ...product,
+          type: hydratedProduct.cat || product.type,
+          title: hydratedProduct.name || product.title,
+          shortDesc: hydratedProduct.desc || product.shortDesc,
+          fullDesc: override?.descriptionEdited ? `<p>${sanitize(hydratedProduct.desc)}</p>` : product.fullDesc,
+          specs: hydratedProduct.price ? [...product.specs, { label: 'Prezzo', val: `€${hydratedProduct.price}` }] : product.specs,
+          images: hydratedProduct.photos.length ? hydratedProduct.photos : product.images,
+          mailSubject: encodeURIComponent(`Richiesta informazioni: ${hydratedProduct.name || product.title}`)
+        };
+      }));
+      const customProducts = await Promise.all(managedProducts.filter(product => !product.catalogId).map(hydrateAdminPhotos));
+      const customCards = customProducts.map(product => ({
+        id: product.id,
+        type: product.cat || 'Prodotto',
+        title: product.name,
+        shortDesc: product.desc || 'Descrizione non disponibile.',
+        fullDesc: `<p>${sanitize(product.desc || 'Descrizione non disponibile.')}</p>`,
+        specs: [
+          { label: 'Categoria', val: product.cat || '—' },
+          { label: 'Prezzo', val: `€${product.price}` }
+        ],
+        highlights: product.photos.length ? [`Galleria con ${product.photos.length} foto.`] : ['Foto non disponibili.'],
+        images: product.photos.length ? product.photos : ['sfondo1.png'],
+        mailSubject: encodeURIComponent(`Richiesta informazioni: ${product.name}`)
+      }));
+      displayedProducts = [...catalogCards.filter(Boolean), ...customCards];
+      const grid = document.getElementById('products-grid');
+      grid.innerHTML = displayedProducts.map(buildProductCard).join('');
+    }
+
+    renderProducts();
 
     /* ─── Modal logic ─── */
     let currentProduct = null;
     let currentImgIndex = 0;
 
-    function openModal(id) {
-      const p = PRODUCTS_DATA.find(x => x.id === id);
+    function openProductModal(id) {
+      const p = displayedProducts.find(x => String(x.id) === String(id));
       if (!p) return;
       currentProduct = p;
       currentImgIndex = 0;
@@ -896,14 +947,14 @@
       setGalleryImage(currentImgIndex + dir);
     }
 
-    function closeModal() {
+    function closeProductModal() {
       document.getElementById('modal-backdrop').classList.remove('active');
       document.body.style.overflow = '';
       currentProduct = null;
     }
 
     function handleBackdropClick(e) {
-      if (e.target === document.getElementById('modal-backdrop')) closeModal();
+      if (e.target === document.getElementById('modal-backdrop')) closeProductModal();
     }
 
     /* ─── Lightbox (fullscreen da modal) ─── */
@@ -922,7 +973,7 @@
         return;
       }
       if (!document.getElementById('modal-backdrop').classList.contains('active')) return;
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') closeProductModal();
       if (e.key === 'ArrowLeft') galleryNav(-1);
       if (e.key === 'ArrowRight') galleryNav(1);
     });
