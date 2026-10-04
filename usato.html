@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Usato — GRU SCAR SRL</title>
+  <meta name="description" content="GRU SCAR SRL offre vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati, con consulenza tecnica e mercato usato selezionato.">
+  <link rel="canonical" href="https://www.gruscar.it/usato.html">
+  <link rel="icon" type="image/png" href="log.png">
+  <link rel="apple-touch-icon" href="log.png">
+  <meta property="og:site_name" content="GRU SCAR SRL">
+  <meta property="og:title" content="Usato — GRU SCAR SRL">
+  <meta property="og:description" content="Mercato usato selezionato per camion, gru e impianti scarrabili verificati dal team GRU SCAR SRL.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.gruscar.it/usato.html">
+  <meta property="og:image" content="https://www.gruscar.it/log.png">
+  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -125,11 +136,12 @@
     <script>
       let usedFilter = 'tutti';
 
-      function renderUsedItems(filter) {
+      async function renderUsedItems(filter) {
         if (filter !== undefined) usedFilter = filter;
         const grid = document.getElementById('usedGrid');
         const count = document.getElementById('usedCount');
-        const items = getUsedItems().filter(i => i.approved && (usedFilter === 'tutti' || i.condition === usedFilter));
+        const savedItems = getUsedItems().filter(i => i.approved && (usedFilter === 'tutti' || i.condition === usedFilter));
+        const items = await Promise.all(savedItems.map(hydrateAdminPhotos));
         count.textContent = items.length + ' articol' + (items.length === 1 ? 'o' : 'i');
         if (!items.length) {
           grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>Nessun articolo trovato.</p></div>';
@@ -165,8 +177,9 @@
         renderUsedItems(f);
       }
 
-      function openUsedDetail(id) {
-        const i = getUsedItems().find(x => x.id === id);
+      async function openUsedDetail(id) {
+        const savedItem = getUsedItems().find(x => x.id === id);
+        const i = savedItem ? await hydrateAdminPhotos(savedItem) : null;
         if (!i) return;
         const condColors = { ottimo: 'badge-success', buono: 'badge-warning', usato: 'badge-gold' };
         const hasFoto = i.photos && i.photos.length > 0;
@@ -216,9 +229,7 @@
     </script>
   </template>
 
-  <main style="min-height:calc(100vh - var(--nav-h));display:grid;place-items:center;padding:4rem 1.5rem;">
-    <p style="margin:0;font-family:'Outfit',sans-serif;font-size:clamp(2rem,5vw,3rem);color:var(--text);text-align:center;">a breve...</p>
-  </main>
+
 
   <footer id="site-footer"></footer>
   <script src="main.js"></script>
