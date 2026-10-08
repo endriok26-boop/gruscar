@@ -2,18 +2,19 @@
 GRU SCAR SRL — JavaScript Condiviso
 ════════════════════════════════════════════════════════ */
 
-/* ── SICUREZZA: XSS prevention ──────────────────────────── */
 function sanitize(str) {
   const d = document.createElement('div');
   d.appendChild(document.createTextNode(String(str || '')));
   return d.innerHTML;
 }
 
-/* ── VALIDAZIONE ────────────────────────────────────────── */
+function escapeAttr(str) {
+  return sanitize(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function isValidEmail(e) { return /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{1,10}$/.test(e); }
 function isValidPrice(v) { const n = parseFloat(v); return !isNaN(n) && n >= 0; }
 
-/* ── LOCAL STORAGE (safe) ───────────────────────────────── */
 function getData(key, def = []) {
   try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
 }
@@ -21,7 +22,6 @@ function setData(key, val) {
   try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch { showToast('Errore salvataggio', 'error'); return false; }
 }
 
-/* ── ARCHIVIO FOTO ADMIN (IndexedDB) ────────────────────── */
 const ADMIN_MEDIA_DB_NAME = 'gruscar-admin-media';
 const ADMIN_MEDIA_STORE = 'photos';
 let adminMediaDbPromise;
@@ -140,7 +140,6 @@ function getAdminPhotoCount(item) {
   return item?.foto ? 1 : 0;
 }
 
-/* ── TOAST ──────────────────────────────────────────────── */
 let _toastTimer;
 function showToast(msg, type = '') {
   const t = document.getElementById('toast');
@@ -152,7 +151,6 @@ function showToast(msg, type = '') {
   _toastTimer = setTimeout(() => { t.className = 'toast'; }, 3800);
 }
 
-/* ── NAVBAR scroll ──────────────────────────────────────── */
 function initNavbar() {
   const nav = document.getElementById('navbar');
   if (!nav) return;
@@ -169,7 +167,6 @@ function initNavbar() {
   });
 }
 
-/* ── MOBILE NAV ─────────────────────────────────────────── */
 function toggleMobileNav() {
   const mob = document.getElementById('mobileNav');
   const ham = document.querySelector('.hamburger');
@@ -187,7 +184,6 @@ function closeMobileNav() {
   document.body.style.overflow = '';
 }
 
-/* ── FADE-IN OBSERVER ───────────────────────────────────── */
 function initFadeIn() {
   const obs = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -196,7 +192,6 @@ function initFadeIn() {
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 }
 
-/* ── MODAL ──────────────────────────────────────────────── */
 function openModal(id) {
   const m = document.getElementById(id);
   if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -206,7 +201,6 @@ function closeModal(id) {
   if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
 }
 
-/* ══ ADMIN AUTH ═══════════════════════════════════════════ */
 const ADMIN_SESSION_KEY = '_adn_sess';
 const ADMIN_CREDENTIALS = { user: 'admin', pass: 'Admin2024!' };
 function checkAdminSession() { return sessionStorage.getItem(ADMIN_SESSION_KEY) === '1'; }
@@ -251,7 +245,6 @@ function adminLogout() {
   showToast('Disconnesso.');
 }
 
-/* ═══ DATI ADMIN ═════════════════════════════════════════ */
 const LEGACY_DEMO_PRODUCT_IDS = new Set(['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8']);
 const LEGACY_DEMO_USED_IDS = new Set(['u1', 'u2', 'u3', 'u4']);
 
@@ -297,18 +290,29 @@ function getUsedItems() { return getAdminCollection('usedItems'); }
 
 removeLegacyDemoData();
 
+// Categorie condivise tra Prodotti pubblicati e Usato (pannello admin)
+const PRODUCT_CATEGORIES = [
+  'Mezzo', 'Attrezzatura', 'Allestimento', 'Servizio', 'Novità',
+  'Compattatore mobile', 'Compattatore fisso', 'Allestimento semirimorchi',
+  'Semirimorchi', 'Rimorchi', 'Cassone', 'Gru', 'Impianto scarrabile',
+  'Motrice', 'Trattore', 'Pressa fissa'
+];
+
+function categoryOptionsHTML() {
+  return PRODUCT_CATEGORIES.map(c => `<option value="${escapeAttr(c)}">${sanitize(c)}</option>`).join('');
+}
+
 function conditionLabel(c) { return { ottimo:'Ottimo', buono:'Buono', usato:'Usato' }[c] || c; }
 
-/* ═══ ADMIN PANEL ═══════════════════════════════════════ */
 function openAdminPanel() {
   const panel = document.getElementById('admin-panel');
   if (!panel) return;
   panel.classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (typeof renderAdminRequests === 'function') renderAdminRequests();
-  if (typeof renderAdminContacts === 'function') renderAdminContacts();
-  if (typeof renderProductsAdmin === 'function') renderProductsAdmin();
-  if (typeof renderUsedAdmin === 'function') renderUsedAdmin();
+  renderAdminContacts();
+  renderAdminUsedRequests();
+  renderProductsAdmin();
+  renderUsedAdmin();
   updateAdminBadge();
 }
 
@@ -326,7 +330,6 @@ function switchAdminTab(tab, btn) {
   if (tc) tc.classList.add('active');
 }
 
-/* ── Admin: Prodotti (NO PREZZO) ──────────────────────────── */
 function renderProductsAdmin() {
   const tb = document.getElementById('productsAdminTable');
   if (!tb) return;
@@ -388,8 +391,8 @@ function saveProductRecord(product) {
 
 function refreshProductViews() {
   renderProductsAdmin();
-  if (typeof renderProducts === 'function') renderProducts();
-  if (typeof renderHomeProducts === 'function') renderHomeProducts();
+  renderProducts();
+  renderHomeProducts();
 }
 
 function resetAddProductForm() {
@@ -523,14 +526,13 @@ async function deleteProduct(id) {
   showToast('Prodotto rimosso.', 'error');
 }
 
-/* ── Admin: Usato (CON PREZZO + IVA) ─────────────────────── */
 function renderUsedAdmin() {
   const tb = document.getElementById('usedAdminTable');
   if (!tb) return;
   const items = getUsedItems();
   tb.innerHTML = items.length ? items.map(i => `<tr>
     <td><strong>${sanitize(i.name)}</strong></td>
-    <td style="color:var(--text-muted)">${sanitize(i.seller)}</td>
+    <td style="color:var(--text-muted)">${sanitize(i.cat || '—')}</td>
     <td>${getAdminPhotoCount(i)} foto</td>
     <td><strong>€${Number(i.price).toLocaleString('it-IT')}</strong> <span style="font-size:.7rem;color:var(--text-dim);">+ IVA</span></td>
     <td><span class="badge cond-${sanitize(i.condition)}">${conditionLabel(i.condition)}</span></td>
@@ -544,8 +546,8 @@ async function removeUsedItem(id) {
   if (!setData('usedItems', getUsedItems().filter(i => i.id !== id))) return;
   await deleteAdminPhotos(item?.photoIds);
   renderUsedAdmin();
-  if (typeof renderUsedItems === 'function') renderUsedItems();
-  if (typeof renderHomeUsed === 'function') renderHomeUsed();
+  renderUsedItems();
+  renderHomeUsed();
   showToast('Articolo rimosso.', 'error');
 }
 
@@ -554,12 +556,11 @@ function addUsedItemAdmin(data) {
   items.unshift(data);
   if (!setData('usedItems', items)) return false;
   renderUsedAdmin();
-  if (typeof renderUsedItems === 'function') renderUsedItems();
-  if (typeof renderHomeUsed === 'function') renderHomeUsed();
+  renderUsedItems();
+  renderHomeUsed();
   return true;
 }
 
-/* ── Admin: Contatti ──────────────────────────────────── */
 function renderAdminContacts() {
   const c = document.getElementById('contactsList');
   if (!c) return;
@@ -588,7 +589,6 @@ function markContactRead(id) {
   if (c) { c.read = true; setData('contactMessages', contacts); renderAdminContacts(); updateAdminBadge(); }
 }
 
-/* ── Admin: Gestione Articoli Usato ricevuti per email ── */
 function renderAdminUsedRequests() {
   const c = document.getElementById('usedRequestsList');
   if (!c) return;
@@ -617,7 +617,7 @@ function publishUsedFromRequest(id) {
   const reqs = getData('usedEmailRequests');
   const r = reqs.find(x => x.id === id);
   if (!r) return;
-  if (!addUsedItemAdmin({ id:'u-'+Date.now(), name:r.articolo, seller:r.nome, price:r.prezzo, condition:r.condizioni, descShort:r.descrizione.substring(0,150), descLong:r.descrizione, approved:true })) return;
+  if (!addUsedItemAdmin({ id:'u-'+Date.now(), name:r.articolo, cat:'', price:r.prezzo, condition:r.condizioni, descShort:r.descrizione.substring(0,150), descLong:r.descrizione, approved:true })) return;
   if (!setData('usedEmailRequests', reqs.filter(x => x.id !== id))) return;
   renderAdminUsedRequests();
   showToast('Articolo pubblicato nell\'usato!', 'success');
@@ -630,7 +630,6 @@ function deleteUsedRequest(id) {
   showToast('Segnalazione eliminata.', 'error');
 }
 
-/* ── Contact Form ─────────────────────────────────────── */
 function sendContact() {
   const nome = document.getElementById('cNome')?.value.trim();
   const email = document.getElementById('cEmail')?.value.trim();
@@ -654,21 +653,133 @@ function sendContact() {
   updateAdminBadge();
 }
 
-/* ── RICERCA MOBILE ──────────────────────────────────── */
-function handleSearch(query) {
-  const container = document.getElementById('mobileSearchResults');
-  if (!container) return;
-  query = query.trim().toLowerCase();
-  if (query.length < 2) { container.innerHTML = ''; return; }
-  const prods = getProducts().filter(p => p.name.toLowerCase().includes(query) || (p.descShort||p.desc||'').toLowerCase().includes(query));
-  const used = getUsedItems().filter(i => i.approved && (i.name.toLowerCase().includes(query) || (i.descShort||i.desc||'').toLowerCase().includes(query)));
-  let html = '';
-  if (prods.length) html += prods.slice(0,3).map(p => `<a href="prodotti.html" style="display:block;padding:.5rem;border-bottom:1px solid var(--border);font-size:.85rem;color:var(--text);">${sanitize(p.name)} <span style="font-size:.7rem;color:var(--gold);">(Prodotto)</span></a>`).join('');
-  if (used.length) html += used.slice(0,3).map(i => `<a href="usato.html" style="display:block;padding:.5rem;border-bottom:1px solid var(--border);font-size:.85rem;color:var(--text);">${sanitize(i.name)} <span style="font-size:.7rem;color:var(--gold);">(Usato)</span></a>`).join('');
-  container.innerHTML = html || '<p style="font-size:.8rem;color:var(--text-dim);padding:.5rem;">Nessun risultato</p>';
+/* ══════════════════════════════════════════════════════════
+   RICERCA SITO — barra in alto, valida per tutte le pagine
+   Cerca in: pagine del sito, prodotti (anche quelli aggiunti
+   dall'admin) e articoli usati pubblicati.
+   ══════════════════════════════════════════════════════════ */
+const SITE_PAGES = [
+  { title: 'Home', url: 'index.html', keywords: 'home principale gru scar camion scarrabili compattatori' },
+  { title: 'Chi Siamo', url: 'chi-siamo.html', keywords: 'azienda storia esperienza famiglia 30 anni valori missione officina' },
+  { title: 'Servizi', url: 'cosa-offriamo.html', keywords: 'servizi cosa offriamo riparazione allestimento consulenza tecnica assistenza garanzia collaudo certificazione vendita nuovo usato' },
+  { title: 'Prodotti', url: 'prodotti.html', keywords: 'prodotti catalogo mezzi camion gru scarrabili compattatori attrezzature' },
+  { title: 'Usato', url: 'usato.html', keywords: 'usato articoli usati mercato camion gru occasioni' },
+  { title: 'Vendi il tuo usato', url: 'vendi-usato.html', keywords: 'vendi vendere usato valutazione proponi articolo' },
+  { title: 'Contatti', url: 'contatti.html', keywords: 'contatti telefono email indirizzo scrivici richiesta informazioni' },
+  { title: 'Termini e Condizioni', url: 'termini-e-condizioni.html', keywords: 'termini condizioni legale privacy' }
+];
+
+function normalizeSearch(str) {
+  return String(str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-/* ── RENDER PUBBLICI ─────────────────────────────────── */
+function matchesQuery(tokens, ...fields) {
+  const haystack = normalizeSearch(fields.join(' '));
+  return tokens.every(t => haystack.includes(t));
+}
+
+function searchSite(query) {
+  const tokens = normalizeSearch(query).split(/\s+/).filter(Boolean);
+  if (!tokens.length) return { pages: [], products: [], used: [] };
+  const byNameFirst = q => (a, b) => {
+    const an = normalizeSearch(a.name).includes(tokens[0]) ? 0 : 1;
+    const bn = normalizeSearch(b.name).includes(tokens[0]) ? 0 : 1;
+    return an - bn;
+  };
+  const products = getProducts()
+    .filter(p => matchesQuery(tokens, p.name, p.cat, p.descShort, p.descLong, p.desc))
+    .sort(byNameFirst()).slice(0, 5);
+  const used = getUsedItems()
+    .filter(i => i.approved && matchesQuery(tokens, i.name, i.cat, conditionLabel(i.condition), i.descShort, i.descLong, i.desc))
+    .sort(byNameFirst()).slice(0, 5);
+  const pages = SITE_PAGES
+    .filter(p => matchesQuery(tokens, p.title, p.keywords)).slice(0, 4);
+  return { pages, products, used };
+}
+
+function renderSearchResults(query) {
+  const box = document.getElementById('siteSearchResults');
+  if (!box) return;
+  const q = (query || '').trim();
+  if (q.length < 2) { box.innerHTML = ''; return; }
+  const { pages, products, used } = searchSite(q);
+  let html = '';
+  if (products.length) {
+    html += '<div class="search-group-title">Prodotti</div>' + products.map(p => {
+      const id = p.catalogId || p.id;
+      return `<a class="search-result-item" href="prodotti.html#apri-${encodeURIComponent(id)}">
+        <div><div class="search-result-name">${sanitize(p.name)}</div><div class="search-result-cat">${sanitize(p.cat || 'Prodotto')}</div></div>
+        <span class="search-result-side">Vedi →</span></a>`;
+    }).join('');
+  }
+  if (used.length) {
+    html += '<div class="search-group-title">Usato</div>' + used.map(i => `
+      <a class="search-result-item" href="usato.html#articolo-${encodeURIComponent(i.id)}">
+        <div><div class="search-result-name">${sanitize(i.name)}</div><div class="search-result-cat">Usato · ${sanitize(conditionLabel(i.condition))}</div></div>
+        <span class="search-result-side">€${Number(i.price).toLocaleString('it-IT')} + IVA</span></a>`).join('');
+  }
+  if (pages.length) {
+    html += '<div class="search-group-title">Pagine</div>' + pages.map(p => `
+      <a class="search-result-item" href="${escapeAttr(p.url)}">
+        <div><div class="search-result-name">${sanitize(p.title)}</div><div class="search-result-cat">Pagina del sito</div></div>
+        <span class="search-result-side">Apri →</span></a>`).join('');
+  }
+  box.innerHTML = html || '<div class="search-no-results">Nessun risultato per “' + sanitize(q) + '”.</div>';
+}
+
+function openSiteSearch() {
+  const panel = document.getElementById('siteSearch');
+  if (!panel) return;
+  closeMobileNav();
+  panel.classList.add('open');
+  document.getElementById('siteSearchBtn')?.setAttribute('aria-expanded', 'true');
+  const input = document.getElementById('siteSearchInput');
+  if (input) { input.focus(); input.select(); renderSearchResults(input.value); }
+}
+
+function closeSiteSearch() {
+  document.getElementById('siteSearch')?.classList.remove('open');
+  document.getElementById('siteSearchBtn')?.setAttribute('aria-expanded', 'false');
+}
+
+function toggleSiteSearch() {
+  const panel = document.getElementById('siteSearch');
+  if (!panel) return;
+  panel.classList.contains('open') ? closeSiteSearch() : openSiteSearch();
+}
+
+// Compatibilità con la vecchia funzione
+function handleSearch(query) { renderSearchResults(query); }
+
+function initSiteSearch() {
+  const input = document.getElementById('siteSearchInput');
+  const panel = document.getElementById('siteSearch');
+  if (!input || !panel || panel.dataset.ready) return;
+  panel.dataset.ready = '1';
+  input.addEventListener('input', () => renderSearchResults(input.value));
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeSiteSearch(); return; }
+    if (e.key === 'Enter') {
+      const first = document.querySelector('#siteSearchResults .search-result-item');
+      if (first) { e.preventDefault(); window.location.href = first.getAttribute('href'); }
+    }
+  });
+  // Clic su un risultato: chiudi il pannello (utile quando si è già nella stessa pagina)
+  document.getElementById('siteSearchResults')?.addEventListener('click', e => {
+    if (e.target.closest('a')) setTimeout(closeSiteSearch, 50);
+  });
+  // Clic fuori o tasto Esc
+  document.addEventListener('click', e => {
+    if (!panel.classList.contains('open')) return;
+    if (e.target.closest('#siteSearch') || e.target.closest('#siteSearchBtn')) return;
+    closeSiteSearch();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSiteSearch(); });
+}
+
+/* ══════════════════════════════════════════════════════════
+   RENDER PRODOTTI — FUNZIONI AGGIUNTE (MANCAVANO!)
+   ══════════════════════════════════════════════════════════ */
 async function renderProducts() {
   const grid = document.getElementById('productsGrid');
   if (!grid) return;
@@ -703,6 +814,9 @@ async function renderHomeProducts() {
   initFadeIn();
 }
 
+/* ══════════════════════════════════════════════════════════
+   RENDER USATO — FUNZIONI AGGIUNTE (QUESTO ERA IL BUG!)
+   ══════════════════════════════════════════════════════════ */
 async function renderUsedItems() {
   const grid = document.getElementById('usedGrid');
   if (!grid) return;
@@ -741,14 +855,15 @@ async function renderHomeUsed() {
   initFadeIn();
 }
 
-/* ── Admin: Aggiungi Usato Manualmente ────────────────── */
 function resetAddUsedForm() {
-  ['uNome', 'uPrezzo', 'uVenditore', 'uDescShort', 'uDescLong'].forEach(id => {
+  ['uNome', 'uPrezzo', 'uDescShort', 'uDescLong'].forEach(id => {
     const field = document.getElementById(id);
     if (field) field.value = '';
   });
   const condition = document.getElementById('uCondizioni');
   if (condition) condition.selectedIndex = 0;
+  const usedCat = document.getElementById('uCat');
+  if (usedCat) usedCat.selectedIndex = 0;
   const photo = document.getElementById('uFoto');
   if (photo) photo.value = '';
   const preview = document.getElementById('uFotoPreview');
@@ -771,7 +886,7 @@ function closeAddUsed() {
 async function addUsedManual() {
   const nome = document.getElementById('uNome')?.value.trim();
   const prezzo = parseFloat(document.getElementById('uPrezzo')?.value) || 0;
-  const venditore = document.getElementById('uVenditore')?.value.trim() || 'Interno';
+  const categoria = document.getElementById('uCat')?.value || PRODUCT_CATEGORIES[0];
   const cond = document.getElementById('uCondizioni')?.value || 'usato';
   const descShort = document.getElementById('uDescShort')?.value.trim() || '';
   const descLong = document.getElementById('uDescLong')?.value.trim() || '';
@@ -789,7 +904,7 @@ async function addUsedManual() {
   const saved = addUsedItemAdmin({
     id,
     name: nome.substring(0, 120),
-    seller: venditore.substring(0, 80),
+    cat: categoria,
     price: prezzo,
     condition: cond,
     descShort: descShort.substring(0, 150),
@@ -827,7 +942,6 @@ function previewAdminFoto(input, previewId) {
     </div>`;
 }
 
-/* ── INIT ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initFadeIn();
