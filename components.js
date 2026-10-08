@@ -2,7 +2,6 @@
 GRU SCAR SRL — Componenti Condivisi (navbar, footer, admin)
 ════════════════════════════════════════════════════════ */
 
-/* ── Inietta Navbar ────────────────────────────────────── */
 function injectNavbar() {
   const nav = document.getElementById('navbar');
   if (!nav) return;
@@ -21,21 +20,36 @@ function injectNavbar() {
           <a href="vendi-usato.html">Vendi</a>
           <a href="contatti.html">Contatti</a>
         </nav>
-        <div class="nav-right">
-          <button class="nav-admin-btn" onclick="openAdminLogin()">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Admin
+        <div class="nav-tools">
+          <button class="nav-search-btn" id="siteSearchBtn" type="button" aria-label="Cerca nel sito" aria-expanded="false" aria-controls="siteSearch" onclick="toggleSiteSearch()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
-        </div>
-        <div class="hamburger" onclick="toggleMobileNav()">
-          <span></span><span></span><span></span>
+          <div class="nav-right">
+            <button class="nav-admin-btn" onclick="openAdminLogin()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Admin
+            </button>
+          </div>
+          <div class="hamburger" onclick="toggleMobileNav()">
+            <span></span><span></span><span></span>
+          </div>
         </div>
       </div>
     </div>
+    <div class="site-search" id="siteSearch" role="search">
+      <div class="container">
+        <div class="site-search-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="siteSearchInput" class="site-search-input" placeholder="Cerca prodotti, usato, servizi..." autocomplete="off" aria-label="Cerca nel sito">
+          <button type="button" class="site-search-close" aria-label="Chiudi ricerca" onclick="closeSiteSearch()">×</button>
+        </div>
+        <div class="site-search-results" id="siteSearchResults" aria-live="polite"></div>
+      </div>
+    </div>
   `;
+  if (typeof initSiteSearch === 'function') initSiteSearch();
 }
 
-/* ── Inietta Mobile Nav ─────────────────────────────────── */
 function injectMobileNav() {
   const mob = document.getElementById('mobileNav');
   if (!mob) return;
@@ -43,10 +57,7 @@ function injectMobileNav() {
     <a href="index.html" class="mobile-brand" aria-label="GRU SCAR SRL — Home">
       <img src="logo.png" alt="GRU SCAR SRL">
     </a>
-    <div style="padding:0 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1rem;">
-      <input type="text" id="mobileSearchInput" placeholder="Cerca prodotti o usato..." oninput="handleSearch(this.value)" style="width:100%;padding:.7rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);font-size:.9rem;background:var(--surface);color:var(--text);">
-      <div id="mobileSearchResults" style="margin-top:.5rem;"></div>
-    </div>
+    <button class="btn btn-light w-full" style="margin-bottom:.75rem;" onclick="openSiteSearch()">🔍 Cerca nel sito</button>
     <a href="index.html">Home</a>
     <a href="chi-siamo.html">Chi Siamo</a>
     <a href="cosa-offriamo.html">Servizi</a>
@@ -60,7 +71,6 @@ function injectMobileNav() {
   `;
 }
 
-/* ── Inietta Footer ─────────────────────────────────────── */
 function injectFooter() {
   const f = document.getElementById('site-footer');
   if (!f) return;
@@ -156,7 +166,6 @@ function injectFooter() {
   });
 }
 
-/* ── Inietta Admin Modal + Panel ────────────────────────── */
 function injectAdminUI() {
   const existing = document.getElementById('adminLoginModal');
   if (existing) return;
@@ -231,13 +240,7 @@ function injectAdminUI() {
             <div class="grid-2">
               <div class="form-group"><label class="form-label">Nome *</label><input class="form-input" id="pNome" type="text" placeholder="Nome prodotto" maxlength="120"></div>
               <div class="form-group"><label class="form-label">Categoria</label>
-                <select class="form-input" id="pCat">
-                  <option value="Mezzo">Mezzo</option>
-                  <option value="Attrezzatura">Attrezzatura</option>
-                  <option value="Allestimento">Allestimento</option>
-                  <option value="Servizio">Servizio</option>
-                  <option value="Novità">Novità</option>
-                </select>
+                <select class="form-input" id="pCat">${categoryOptionsHTML()}</select>
               </div>
             </div>
             <div class="form-group"><label class="form-label">Descrizione Breve</label><input class="form-input" id="pDescShort" type="text" placeholder="Sintesi per le card (max 150 caratteri)" maxlength="150"><div class="form-hint">Mostrata nelle anteprime e card prodotto.</div></div>
@@ -276,7 +279,7 @@ function injectAdminUI() {
               <div class="form-group"><label class="form-label">Prezzo (€) + IVA *</label><input class="form-input" id="uPrezzo" type="number" placeholder="0" min="0"><div class="form-hint">Prezzo IVA esclusa. Verrà mostrato come "€X + IVA".</div></div>
             </div>
             <div class="grid-2">
-              <div class="form-group"><label class="form-label">Venditore / Provenienza</label><input class="form-input" id="uVenditore" type="text" placeholder="es. Cliente privato" maxlength="80"></div>
+              <div class="form-group"><label class="form-label">Categoria</label><select class="form-input" id="uCat">${categoryOptionsHTML()}</select></div>
               <div class="form-group"><label class="form-label">Condizioni</label>
                 <select class="form-input" id="uCondizioni">
                   <option value="ottimo">Ottime — Come nuovo</option>
@@ -298,7 +301,7 @@ function injectAdminUI() {
             </div>
           </div>
           <table class="admin-table">
-            <thead><tr><th>Articolo</th><th>Venditore</th><th>Foto</th><th>Prezzo</th><th>Condizioni</th><th>Azioni</th></tr></thead>
+            <thead><tr><th>Articolo</th><th>Categoria</th><th>Foto</th><th>Prezzo</th><th>Condizioni</th><th>Azioni</th></tr></thead>
             <tbody id="usedAdminTable"></tbody>
           </table>
         </div>
@@ -308,7 +311,6 @@ function injectAdminUI() {
   `);
 }
 
-/* ── INIT COMPONENTI ─────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   injectNavbar();
   injectAdminUI();
