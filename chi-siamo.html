@@ -6,14 +6,14 @@
   <title>Chi Siamo — GRU SCAR SRL</title>
   <meta name="description" content="GRU SCAR SRL offre vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati, con consulenza tecnica e mercato usato selezionato.">
   <link rel="canonical" href="https://www.gruscar.it/chi-siamo.html">
-  <link rel="icon" type="image/png" href="log.png">
-  <link rel="apple-touch-icon" href="log.png">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <meta property="og:site_name" content="GRU SCAR SRL">
   <meta property="og:title" content="Chi Siamo — GRU SCAR SRL">
   <meta property="og:description" content="Scopri GRU SCAR SRL: vendita, assistenza e riparazione di gru, scarrabili, compattatori e camion.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.gruscar.it/chi-siamo.html">
-  <meta property="og:image" content="https://www.gruscar.it/log.png">
+  <meta property="og:image" content="https://www.gruscar.it/logo.png">
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -46,10 +46,30 @@
       z-index: 1;
     }
     .about-page .page-header {
-      background: rgba(237, 244, 251, 0.76);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: rgba(199, 211, 232, 0.55);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+    }
+    .about-page .page-header h1 { color: #fff; text-shadow: 0 2px 18px rgba(16, 37, 64, 0.55); }
+    .about-page .page-header .section-tag { color: #ff6b76; text-shadow: 0 1px 10px rgba(16, 37, 64, 0.6); }
+    .about-page .breadcrumb { color: rgba(255, 255, 255, 0.75); }
+    .about-page .breadcrumb a { color: #fff; }
+    .about-page .section-alt {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+    }
+    .about-page .glass-card .section-tag { color: var(--gold); text-shadow: none; }
+    .about-page .glass-card {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.38);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 16px 40px rgba(16, 37, 64, 0.12);
+      padding: 2.25rem;
     }
     .about-hero-pin {
       height: 180vh;
@@ -105,7 +125,6 @@
     .about-intro-copy {
       max-width: 780px;
     }
-    .about-page .section-alt,
     .about-page .stat-box,
     .about-page .offer-card,
     .about-page .about-feat,
@@ -119,10 +138,6 @@
       border: 1.5px solid rgba(255, 255, 255, 0.38);
       border-radius: var(--radius-xl);
       box-shadow: 0 16px 40px rgba(16, 37, 64, 0.12);
-    }
-    .about-page .section-alt {
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     }
     .about-page .about-feat {
       padding: 1.2rem;
@@ -196,7 +211,7 @@
   <!-- ════════════ INTRO ════════════ -->
   <section class="section section-alt">
     <div class="container">
-      <div class="fade-in about-intro-copy">
+      <div class="fade-in about-intro-copy glass-card">
           <span class="section-tag">La Nostra Missione</span>
           <h2>Esperienza e innovazione <br>nel mondo delle <em style="color:var(--gold);">gru.</em></h2>
           <div class="divider"></div>
