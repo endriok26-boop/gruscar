@@ -6,14 +6,14 @@
   <title>Servizi — GRU SCAR SRL</title>
   <meta name="description" content="GRU SCAR SRL offre vendita, assistenza e riparazione di gru, impianti scarrabili, compattatori e camion nuovi e usati, con consulenza tecnica e mercato usato selezionato.">
   <link rel="canonical" href="https://www.gruscar.it/cosa-offriamo.html">
-  <link rel="icon" type="image/png" href="log.png">
-  <link rel="apple-touch-icon" href="log.png">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <meta property="og:site_name" content="GRU SCAR SRL">
   <meta property="og:title" content="Servizi — GRU SCAR SRL">
   <meta property="og:description" content="Servizi per gru, impianti scarrabili, compattatori, camion nuovi e usati, con assistenza e consulenza tecnica.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.gruscar.it/cosa-offriamo.html">
-  <meta property="og:image" content="https://www.gruscar.it/log.png">
+  <meta property="og:image" content="https://www.gruscar.it/logo.png">
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -45,12 +45,31 @@
       z-index: 1;
     }
     .services-page .page-header {
-      background: rgba(237, 244, 251, 0.76);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: rgba(199, 211, 232, 0.55);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
     }
-    .services-page .section-alt,
+    .services-page .page-header h1 { color: #fff; text-shadow: 0 2px 18px rgba(16, 37, 64, 0.55); }
+    .services-page .page-header .section-tag { color: #ff6b76; text-shadow: 0 1px 10px rgba(16, 37, 64, 0.6); }
+    .services-page .breadcrumb { color: rgba(255, 255, 255, 0.75); }
+    .services-page .breadcrumb a { color: #fff; }
+    .services-page .section-alt {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+    }
+    .services-page .glass-card .section-tag { color: var(--gold); text-shadow: none; }
+    .services-page .glass-card {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.38);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 16px 40px rgba(16, 37, 64, 0.12);
+      padding: 2.25rem;
+    }
     .services-page .offer-card,
     .services-page .step-item {
       background: rgba(255, 255, 255, 0.84);
@@ -59,10 +78,6 @@
     }
     .services-intro {
       max-width: 760px;
-    }
-    .services-page .section-alt {
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     }
     .services-page .offer-card {
       border: 1.5px solid rgba(255, 255, 255, 0.38);
@@ -154,7 +169,7 @@
   <!-- ════════════ INTRO ════════════ -->
   <section class="section section-alt">
     <div class="container">
-      <div class="fade-in services-intro">
+      <div class="fade-in services-intro glass-card">
         <span class="section-tag">Panoramica</span>
           <h2>Soluzioni per Gru,<br>Impianti Scarrabili e Compattazione</h2>
         <div class="divider"></div>
@@ -168,7 +183,7 @@
   <!-- ════════════ SERVIZI GRIGLIA ════════════ -->
   <section class="section">
     <div class="container">
-      <div class="text-center fade-in" style="max-width:560px;margin:0 auto 4rem;">
+      <div class="text-center fade-in glass-card" style="max-width:560px;margin:0 auto 3rem;">
         <span class="section-tag">I Servizi</span>
         <h2>Tutto quello di cui hai bisogno</h2>
         <div class="divider-center"></div>
@@ -222,213 +237,7 @@
   <!-- ════════════ PROCESSO ════════════ -->
   <section class="section section-alt">
     <div class="container">
-      <div class="text-center fade-in" style="max-width:560px;margin:0 auto 4rem;">
-        <span class="section-tag">Come Lavoriamo</span>
-        <h2>Il Nostro Processo</h2>
-        <div class="divider-center"></div>
-        <p style="color:var(--text-muted);">Seguiamo un percorso chiaro e ordinato per ogni richiesta, dalla prima chiamata fino alla realizzazione finale del lavoro.</p>
-      </div>
-      <div class="steps-row fade-in fade-in-d1">
-        <div class="step-item active">
-          <div class="step-num">1</div>
-          <h4 style="margin-bottom:.5rem;">Contatto</h4>
-          <p style="font-size:.83rem;color:var(--text-muted);">Raccogliamo le informazioni iniziali per capire di cosa hai bisogno e quale mezzo o impianto è coinvolto.</p>
-        </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <h4 style="margin-bottom:.5rem;">Analisi</h4>
-          <p style="font-size:.83rem;color:var(--text-muted);">Valutiamo la situazione tecnica e definiamo il tipo di intervento più adatto.</p>
-        </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <h4 style="margin-bottom:.5rem;">Proposta</h4>
-          <p style="font-size:.83rem;color:var(--text-muted);">Ti presentiamo una soluzione concreta, con tempi e lavorazioni definiti in modo chiaro.</p>
-        </div>
-        <div class="step-item">
-          <div class="step-num">4</div>
-          <h4 style="margin-bottom:.5rem;">Realizzazione</h4>
-          <p style="font-size:.83rem;color:var(--text-muted);">Eseguiamo il lavoro, verifichiamo il risultato e consegniamo un mezzo pronto all'uso.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════ CTA ════════════ -->
-  <section class="section-sm">
-    <div class="container fade-in">
-      <div style="background:var(--text);border-radius:var(--radius-xl);padding:3.5rem;text-align:center;">
-        <span class="section-tag" style="color:var(--gold);">Inizia Ora</span>
-        <h2 style="color:#f6f3ee;margin-top:.5rem;">Pronto a Collaborare?</h2>
-        <p style="color:#6b6459;margin-top:.75rem;max-width:480px;margin-left:auto;margin-right:auto;">Se hai bisogno di un intervento, di un allestimento o di una consulenza tecnica, scrivici e ti aiutiamo a trovare la soluzione giusta.</p>
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
-          <a href="contatti.html" class="btn btn-gold btn-lg">Contattaci →</a>
-          <a href="prodotti.html" class="btn btn-light btn-lg">Vedi Prodotti</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer id="site-footer"></footer>
-  <script src="main.js"></script>
-  <script src="components.js"></script>
-</body>
-</html>
-      background: rgba(237, 244, 251, 0.76);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom-color: rgba(199, 211, 232, 0.55);
-    }
-    .services-page .section-alt,
-    .services-page .offer-card,
-    .services-page .step-item {
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .services-intro {
-      max-width: 760px;
-    }
-    .services-page .section-alt {
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-    }
-    .services-page .offer-card {
-      border: 1.5px solid rgba(255, 255, 255, 0.38);
-    }
-    .services-page .steps-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-      align-items: stretch;
-      grid-auto-rows: 1fr;
-    }
-    .services-page .step-item {
-      padding: 1.5rem;
-      border: 1.5px solid rgba(255, 255, 255, 0.38);
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      text-align: left;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: .2rem;
-    }
-    .services-page .step-item::before {
-      display: none;
-    }
-    .services-page .step-num {
-      margin: 0 0 1rem;
-    }
-    .services-page .step-item h4 {
-      margin-bottom: .4rem;
-    }
-    .services-page .step-item p {
-      margin: 0;
-      line-height: 1.75;
-    }
-    @media (max-width: 768px) {
-      .services-page-bg {
-        top: 0;
-      }
-      .services-page .steps-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 640px) {
-      .services-page .steps-row {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-<body class="services-page">
-  <header id="navbar"></header>
-  <div class="services-page-bg" aria-hidden="true"></div>
-
-  <div class="page-header">
-    <div class="container page-header-inner">
-      <span class="section-tag">I Nostri Servizi</span>
-      <h1>Cosa Offriamo</h1>
-      <div class="breadcrumb">
-        <a href="index.html">Home</a><span>›</span><span>Servizi</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ INTRO ════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="fade-in services-intro">
-        <span class="section-tag">Panoramica</span>
-          <h2>Soluzioni per Gru,<br>Impianti Scarrabili e Compattazione</h2>
-        <div class="divider"></div>
-        <p class="lead">Offriamo progettazione, riparazione e allestimento per gru, impianti scarrabili e sistemi di compattazione. Vendita nuovo, usato e acquisto usato con assistenza completa.</p>
-        <p style="color:var(--text-muted);margin-top:1rem;line-height:1.8;">Siamo il partner tecnico per chi richiede modifiche su camion, sistemi scarrabili e impianti speciali, con ogni progetto gestito in modo rapido e affidabile.</p>
-        <a href="contatti.html" class="btn btn-gold mt-2">Richiedi Informazioni →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════ SERVIZI GRIGLIA ════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width:560px;margin:0 auto 4rem;">
-        <span class="section-tag">I Servizi</span>
-        <h2>Tutto quello di cui hai bisogno</h2>
-        <div class="divider-center"></div>
-      </div>
-      <div class="grid-3 fade-in fade-in-d1">
-        <div class="offer-card">
-          <div class="offer-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          </div>
-          <div class="offer-title">Vendita Nuovo e Usato</div>
-          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;margin-bottom:1.25rem;">Vendiamo gru, impianti scarrabili e sistemi di compattazione nuovi e usati, tutti controllati dal nostro team tecnico per uso immediato.</p>
-
-        </div>
-        <div class="offer-card">
-          <div class="offer-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-          </div>
-          <div class="offer-title">Mercato Usato</div>
-          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;margin-bottom:1.25rem;">Gestiamo compravendite tecniche di camion usati, gru e sistemi scarrabili con verifica funzionale prima dell’inserimento.</p>
-          <a href="usato.html" class="text-gold" style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Vedi Usato →</a>
-        </div>
-        <div class="offer-card">
-          <div class="offer-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-          </div>
-          <div class="offer-title">Consulenza Tecnica</div>
-          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;margin-bottom:1.25rem;">Supporto progettuale per modifiche, allestimenti e adeguamenti normativi su camion, gru e impianti speciali.</p>
-          <a href="contatti.html" class="text-gold" style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Contattaci →</a>
-        </div>
-        <div class="offer-card">
-          <div class="offer-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <div class="offer-title">Garanzia &amp; Assistenza</div>
-          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;margin-bottom:1.25rem;">Assistenza tecnica dedicata, riparazioni e collaudi su gru, compattatori e impianti scarrabili per ogni tipologia di mezzo.</p>
-          <a href="contatti.html" class="text-gold" style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Scopri →</a>
-        </div>
-      
-        <div class="offer-card">
-          <div class="offer-icon-box">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
-          </div>
-          <div class="offer-title">Collaudo &amp; Certificazione</div>
-          <p style="color:var(--text-muted);font-size:.9rem;line-height:1.8;margin-bottom:1.25rem;">Eseguiamo test funzionali e certificazioni su impianti scarrabili e sistemi di compattazione, garantendo sicurezza e conformità.</p>
-          <a href="contatti.html" class="text-gold" style="font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Scopri →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════════ PROCESSO ════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="text-center fade-in" style="max-width:560px;margin:0 auto 4rem;">
+      <div class="text-center fade-in glass-card" style="max-width:560px;margin:0 auto 3rem;">
         <span class="section-tag">Come Lavoriamo</span>
         <h2>Il Nostro Processo</h2>
         <div class="divider-center"></div>
