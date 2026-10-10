@@ -104,8 +104,8 @@ function injectFooter() {
             </a>
           </div>
           <div style="display:flex;gap:.6rem;">
-            <a href="https://www.facebook.com/share/1BQ4258SXX/?mibextid=wwXIfr" class="footer-social-icon" aria-label="Facebook">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <a href="https://www.instagram.com/gruscar?stkn=MTVvanY3Y3hqcXp4ag%3D%3D&utm_source=qr" class="footer-social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
           </div>
         </div>
@@ -276,7 +276,17 @@ function injectAdminUI() {
             <h4 style="margin-bottom:1rem;">Nuovo Articolo Usato</h4>
             <div class="grid-2">
               <div class="form-group"><label class="form-label">Nome Articolo *</label><input class="form-input" id="uNome" type="text" placeholder="es. Gru Fassi F110" maxlength="120"></div>
-              <div class="form-group"><label class="form-label">Prezzo (€) + IVA *</label><input class="form-input" id="uPrezzo" type="number" placeholder="0" min="0"><div class="form-hint">Prezzo IVA esclusa. Verrà mostrato come "€X + IVA".</div></div>
+              <div class="form-group"><label class="form-label">Prezzo (€) + IVA *</label>
+                <select class="form-input" id="uPrezzoTipo" onchange="toggleUsedPriceRange()" style="margin-bottom:.5rem;">
+                  <option value="fisso">Prezzo fisso</option>
+                  <option value="range">Range (da … a …)</option>
+                </select>
+                <div style="display:flex;gap:.5rem;align-items:center;">
+                  <input class="form-input" id="uPrezzo" type="number" placeholder="Prezzo" min="0" style="flex:1;min-width:0;">
+                  <span id="uPrezzoSep" class="hidden" style="color:var(--text-muted);">–</span>
+                  <input class="form-input hidden" id="uPrezzoMax" type="number" placeholder="Fino a" min="0" style="flex:1;min-width:0;">
+                </div>
+                <div class="form-hint" id="uPrezzoHint">Prezzo IVA esclusa. Verrà mostrato come "€X + IVA".</div></div>
             </div>
             <div class="grid-2">
               <div class="form-group"><label class="form-label">Categoria</label><select class="form-input" id="uCat">${categoryOptionsHTML()}</select></div>
