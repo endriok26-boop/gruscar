@@ -129,7 +129,7 @@
     const USED_PLACEHOLDER_SVG = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Foto Articolo</span>';
 
     function usedPrice(i) {
-      return '€' + Number(i.price).toLocaleString('it-IT');
+      return formatUsedPrice(i);
     }
 
     // Sostituisce la funzione semplice di main.js con la versione completa per questa pagina
