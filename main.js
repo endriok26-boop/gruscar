@@ -202,7 +202,7 @@ function closeModal(id) {
 }
 
 const ADMIN_SESSION_KEY = '_adn_sess';
-const ADMIN_CREDENTIALS = { user: 'admin', pass: 'Admin2024!' };
+const ADMIN_CREDENTIALS = { user: 'administrator.gruacarsrl.it', pass: 'admin.castelfranco123abc' };
 function checkAdminSession() { return sessionStorage.getItem(ADMIN_SESSION_KEY) === '1'; }
 function setAdminSession() { sessionStorage.setItem(ADMIN_SESSION_KEY, '1'); }
 function clearAdminSession() { sessionStorage.removeItem(ADMIN_SESSION_KEY); }
@@ -300,25 +300,6 @@ const PRODUCT_CATEGORIES = [
 
 function categoryOptionsHTML() {
   return PRODUCT_CATEGORIES.map(c => `<option value="${escapeAttr(c)}">${sanitize(c)}</option>`).join('');
-}
-
-// Prezzo usato: fisso (€X) oppure range (€X – €Y)
-function formatUsedPrice(i) {
-  const fmt = n => '€' + Number(n).toLocaleString('it-IT');
-  const max = Number(i.priceMax);
-  return max > Number(i.price) ? `${fmt(i.price)} – ${fmt(max)}` : fmt(i.price);
-}
-
-function toggleUsedPriceRange() {
-  const range = document.getElementById('uPrezzoTipo')?.value === 'range';
-  document.getElementById('uPrezzoMax')?.classList.toggle('hidden', !range);
-  document.getElementById('uPrezzoSep')?.classList.toggle('hidden', !range);
-  const min = document.getElementById('uPrezzo');
-  if (min) min.placeholder = range ? 'Da' : 'Prezzo';
-  const hint = document.getElementById('uPrezzoHint');
-  if (hint) hint.textContent = range
-    ? 'Prezzi IVA esclusa. Verrà mostrato come "€X – €Y + IVA".'
-    : 'Prezzo IVA esclusa. Verrà mostrato come "€X + IVA".';
 }
 
 function conditionLabel(c) { return { ottimo:'Ottimo', buono:'Buono', usato:'Usato' }[c] || c; }
@@ -553,7 +534,7 @@ function renderUsedAdmin() {
     <td><strong>${sanitize(i.name)}</strong></td>
     <td style="color:var(--text-muted)">${sanitize(i.cat || '—')}</td>
     <td>${getAdminPhotoCount(i)} foto</td>
-    <td><strong>${formatUsedPrice(i)}</strong> <span style="font-size:.7rem;color:var(--text-dim);">+ IVA</span></td>
+    <td><strong>€${Number(i.price).toLocaleString('it-IT')}</strong> <span style="font-size:.7rem;color:var(--text-dim);">+ IVA</span></td>
     <td><span class="badge cond-${sanitize(i.condition)}">${conditionLabel(i.condition)}</span></td>
     <td><button class="btn btn-danger btn-sm" onclick="removeUsedItem('${sanitize(i.id)}')">Rimuovi</button></td>
   </tr>`).join('') : '<tr><td colspan="6" class="empty-state">Nessun articolo.</td></tr>';
@@ -735,7 +716,7 @@ function renderSearchResults(query) {
     html += '<div class="search-group-title">Usato</div>' + used.map(i => `
       <a class="search-result-item" href="usato.html#articolo-${encodeURIComponent(i.id)}">
         <div><div class="search-result-name">${sanitize(i.name)}</div><div class="search-result-cat">Usato · ${sanitize(conditionLabel(i.condition))}</div></div>
-        <span class="search-result-side">${formatUsedPrice(i)} + IVA</span></a>`).join('');
+        <span class="search-result-side">€${Number(i.price).toLocaleString('it-IT')} + IVA</span></a>`).join('');
   }
   if (pages.length) {
     html += '<div class="search-group-title">Pagine</div>' + pages.map(p => `
@@ -848,7 +829,7 @@ async function renderUsedItems() {
         <div class="prod-name">${sanitize(i.name)}</div>
         <div class="prod-desc">${sanitize(i.descShort || i.desc || '')}</div>
         <div class="prod-footer">
-          <span class="prod-price">${formatUsedPrice(i)}<span class="prod-price-iva">+ IVA</span></span>
+          <span class="prod-price">€${Number(i.price).toLocaleString('it-IT')}<span class="prod-price-iva">+ IVA</span></span>
         </div>
       </div>
     </div>`).join('') : '<p class="empty-state">Nessun articolo usato disponibile.</p>';
@@ -867,7 +848,7 @@ async function renderHomeUsed() {
         <div class="prod-name">${sanitize(i.name)}</div>
         <div class="prod-desc">${sanitize(i.descShort || i.desc || '')}</div>
         <div class="prod-footer">
-          <span class="prod-price">${formatUsedPrice(i)}<span class="prod-price-iva">+ IVA</span></span>
+          <span class="prod-price">€${Number(i.price).toLocaleString('it-IT')}<span class="prod-price-iva">+ IVA</span></span>
         </div>
       </div>
     </div>`).join('');
@@ -875,15 +856,12 @@ async function renderHomeUsed() {
 }
 
 function resetAddUsedForm() {
-  ['uNome', 'uPrezzo', 'uPrezzoMax', 'uDescShort', 'uDescLong'].forEach(id => {
+  ['uNome', 'uPrezzo', 'uDescShort', 'uDescLong'].forEach(id => {
     const field = document.getElementById(id);
     if (field) field.value = '';
   });
   const condition = document.getElementById('uCondizioni');
   if (condition) condition.selectedIndex = 0;
-  const priceType = document.getElementById('uPrezzoTipo');
-  if (priceType) priceType.value = 'fisso';
-  toggleUsedPriceRange();
   const usedCat = document.getElementById('uCat');
   if (usedCat) usedCat.selectedIndex = 0;
   const photo = document.getElementById('uFoto');
@@ -908,8 +886,6 @@ function closeAddUsed() {
 async function addUsedManual() {
   const nome = document.getElementById('uNome')?.value.trim();
   const prezzo = parseFloat(document.getElementById('uPrezzo')?.value) || 0;
-  const isRange = document.getElementById('uPrezzoTipo')?.value === 'range';
-  const prezzoMax = isRange ? (parseFloat(document.getElementById('uPrezzoMax')?.value) || 0) : 0;
   const categoria = document.getElementById('uCat')?.value || PRODUCT_CATEGORIES[0];
   const cond = document.getElementById('uCondizioni')?.value || 'usato';
   const descShort = document.getElementById('uDescShort')?.value.trim() || '';
@@ -917,7 +893,6 @@ async function addUsedManual() {
   const fotoInput = document.getElementById('uFoto');
   if (!nome || nome.length < 2) return showToast('Inserisci il nome dell\'articolo.', 'error');
   if (!isValidPrice(prezzo) || prezzo === 0) return showToast('Inserisci un prezzo valido.', 'error');
-  if (isRange && (!isValidPrice(prezzoMax) || prezzoMax <= prezzo)) return showToast('Nel range il prezzo massimo deve essere maggiore del minimo.', 'error');
   if (!fotoInput || !fotoInput.files || fotoInput.files.length === 0) return showToast('Seleziona una foto.', 'error');
   const id = 'u-manual-' + Date.now();
   let photoIds;
@@ -931,7 +906,6 @@ async function addUsedManual() {
     name: nome.substring(0, 120),
     cat: categoria,
     price: prezzo,
-    ...(isRange ? { priceMax: prezzoMax } : {}),
     condition: cond,
     descShort: descShort.substring(0, 150),
     descLong: descLong.substring(0, 1000),
