@@ -280,7 +280,7 @@ NAVBAR — LOGO GRANDE E DIRETTAMENTE CLICCABILE
 
 /* LOGO NAVBAR — GRANDE, sempre contenuto nell'altezza della barra */
 .nav-logo > img {
-  height: 100px;
+  height: 112px;
   width: auto;
   max-width: none;
   display: block;
@@ -741,6 +741,7 @@ ADMIN PANEL
 /* ── STAT BOX ────────────────────────────────────────────── */
 .stat-box { text-align: center; padding: 2rem; border: 1.5px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); transition: var(--transition); }
 .stat-box:hover { border-color: var(--gold-border); }
+.highlight-item .hi-number { color: var(--danger); }
 .stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); line-height: 1; }
 .stat-lbl { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; }
 
@@ -752,7 +753,7 @@ RESPONSIVE
   :root { --nav-h: 100px; }
   .nav-links, .nav-right { display: none; }
   .hamburger { display: flex; }
-  .nav-logo > img { height: 84px; }
+  .nav-logo > img { height: 90px; }
 }
 
 @media (max-width: 1024px) {
@@ -764,7 +765,7 @@ RESPONSIVE
   :root { --nav-h: 92px; }
 
   /* Logo navbar mobile */
-  .nav-logo > img { height: 76px; }
+  .nav-logo > img { height: 84px; }
 
   .mobile-brand { display: block !important; border: 0 !important; padding: 0 0 1.25rem !important; margin-bottom: .75rem; }
   .mobile-brand img { height: 120px; }
@@ -789,7 +790,7 @@ RESPONSIVE
   .container { padding: 0 1.25rem; }
   .btn-lg { padding: 0.85rem 1.75rem; font-size: 0.78rem; }
   :root { --nav-h: 84px; }
-  .nav-logo > img { height: 68px; }
+  .nav-logo > img { height: 76px; }
   .brand-signature-logo > img { height: 140px; }
   .footer-brand-logo > img { height: 110px; }
   .site-search { padding: 1rem 0 1.25rem; }
