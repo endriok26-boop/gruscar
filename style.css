@@ -280,7 +280,7 @@ NAVBAR — LOGO GRANDE E DIRETTAMENTE CLICCABILE
 
 /* LOGO NAVBAR — GRANDE, sempre contenuto nell'altezza della barra */
 .nav-logo > img {
-  height: 112px;
+  height: 200px;
   width: auto;
   max-width: none;
   display: block;
@@ -750,10 +750,10 @@ RESPONSIVE
 ══════════════════════════════════════════════════════════ */
 /* Il menu completo passa all'hamburger prima, così il logo grande non schiaccia i link */
 @media (max-width: 1180px) {
-  :root { --nav-h: 100px; }
+  :root { --nav-h: 130px; }
   .nav-links, .nav-right { display: none; }
   .hamburger { display: flex; }
-  .nav-logo > img { height: 90px; }
+  .nav-logo > img { height: 150px; }
 }
 
 @media (max-width: 1024px) {
@@ -762,10 +762,10 @@ RESPONSIVE
 }
 
 @media (max-width: 768px) {
-  :root { --nav-h: 92px; }
+  :root { --nav-h: 130px; }
 
   /* Logo navbar mobile */
-  .nav-logo > img { height: 84px; }
+  .nav-logo > img { height: 150px; }
 
   .mobile-brand { display: block !important; border: 0 !important; padding: 0 0 1.25rem !important; margin-bottom: .75rem; }
   .mobile-brand img { height: 120px; }
@@ -790,8 +790,8 @@ RESPONSIVE
   .container { padding: 0 1.25rem; }
   .btn-lg { padding: 0.85rem 1.75rem; font-size: 0.78rem; }
   :root { --nav-h: 84px; }
-  .nav-logo > img { height: 76px; }
+  .nav-logo > img { height: 90px; }
   .brand-signature-logo > img { height: 140px; }
-  .footer-brand-logo > img { height: 110px; }
+  .footer-brand-logo > img { height: 150px; }
   .site-search { padding: 1rem 0 1.25rem; }
 }
